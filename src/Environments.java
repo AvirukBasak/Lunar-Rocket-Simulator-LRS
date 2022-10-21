@@ -31,7 +31,8 @@ public class Environments
 
     public static Environment skyGrad(Canvas cv, int x, int y)
     {
-        if (m_skyGrad == null) return m_skyGrad = new Environment(cv, AssetsImg.skyGrad, x, y);
+        if (m_skyGrad == null)
+            return m_skyGrad = new Environment(cv, AssetsImg.skyGrad, x, y, 10 *pixelPerMeter/(FPS*FPS), 10 *pixelPerMeter/(FPS*FPS), true);
         else {
             m_skyGrad.x = x;
             m_skyGrad.y = y;

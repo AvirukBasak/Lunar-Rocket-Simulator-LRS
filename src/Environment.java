@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Environment
 {
     protected int width, height;
+    protected boolean hasGround;
     protected BufferedImage bg;
     protected BufferStrategy bs;
 
@@ -27,6 +28,7 @@ public class Environment
         this.bg = bg;
         this.x = x;
         this.y = y;
+        this.hasGround = false;
         this.dxEntity = 0;
         this.dyEntity = 0;
         this.ddxEntity = 0;
@@ -49,11 +51,12 @@ public class Environment
      * @param int default x acceleration of that system due to some potential gradient, pixel/frame2
      * @param int default y acceleration of that system due to some potential gradient, pixel/frame2
      */
-    public Environment(Canvas canvas, BufferedImage bg, int x, int y, int ddx, int ddy)
+    public Environment(Canvas canvas, BufferedImage bg, int x, int y, int ddx, int ddy, boolean hasGround)
     {
         this.bg = bg;
         this.x = x;
         this.y = y;
+        this.hasGround = hasGround;;
         this.dxEntity = 0;
         this.dyEntity = 0;
         this.ddxEntity = ddx;
@@ -137,6 +140,8 @@ public class Environment
         gfx.drawImage(this.bg, this.x, this.y, null);
         if (this.entities != null)
             for (Entity e : this.entities) {
+                if (this.hasGround
+                    && e.y + e.entityImg.getHeight() >= this.height) continue;
                 e.update(this.dxEntity, this.dyEntity);
                 this.dxEntity += this.ddxEntity;
                 this.dyEntity += this.ddyEntity;
