@@ -19,6 +19,8 @@ public class Entity
      */
     protected boolean isSoft;
 
+    protected boolean hidden;
+
     /**
      * An entity is an existence, visualised by its image attribute.
      * @param BufferedImage The attribute image
@@ -28,6 +30,7 @@ public class Entity
     public Entity(int x, int y, BufferedImage img)
     {
         this.isSoft = false;
+        this.hidden = false;
         this.x = x;
         this.y = y;
         if (img != null) this.entityImg = img;
@@ -36,6 +39,8 @@ public class Entity
         this.yBound = img.getHeight();
         this.attachments = null;
     }
+    public void hide() { this.hidden = true; }
+    public void show() { this.hidden = false; }
     /**
      * Updates posn of an entity along with its attachments.
      * @param int delta-x
@@ -67,10 +72,11 @@ public class Entity
      */
     public void render(Graphics gfx)
     {
+        if (hidden) return;
         gfx.drawImage(this.entityImg, this.x, this.y, null);
         if (this.attachments != null)
             for (Entity e : this.attachments)
-                gfx.drawImage(e.entityImg, e.x, e.y, null);
+                e.render(gfx);
     }
     /**
      * Attatch multiple entities to create a larger compound.

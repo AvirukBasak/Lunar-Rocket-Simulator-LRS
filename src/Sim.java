@@ -41,25 +41,28 @@ public class Sim implements Runnable
     {
         switch (AssetsVars.activity) {
             case Activities.BELOW_KARMAN: {
+                Entity rktFlameS1, rktFlameS2, rktFlameS3;
+                rktFlameS1 = rktFlameS2 = rktFlameS3 = null;
                 if (env == null) {
                     env = Environments.skyGrad(this.cv, 0, this.height - AssetsImg.skyGrad.getHeight());
                     final int onPadY = this.height -AssetsImg.lPad.getHeight();
                     Entity lPad = Entities.lPad(0, onPadY);
-                    Entity tower = Entities.tower(this.width/2 -AssetsImg.tower.getWidth()*2,onPadY -AssetsImg.tower.getHeight());
+                    Entity tower = Entities.tower(this.width/2 -AssetsImg.tower.getWidth()*2 + 32,onPadY -AssetsImg.tower.getHeight());
                     lPad.attatch(tower);
                     final int onS1Y = onPadY - AssetsImg.rktS1.getHeight();
                     final int onS2Y = onS1Y - AssetsImg.rktS2.getHeight();
                     final int onS3Y = onS2Y - AssetsImg.rktS3.getHeight();
-                    Entity rktS1 = Entities.rktS1(this.width/2, onS1Y);
-                    Entity rktS2 = Entities.rktS2(this.width/2, onS2Y);
-                    Entity rktS3 = Entities.rktS3(this.width/2, onS3Y);
-                    Entity rktCone = Entities.rktCone(this.width/2, onS3Y -AssetsImg.rktCone.getHeight());
+                    final int rktPosnX = this.width/2 - 16;
+                    Entity rktS1 = Entities.rktS1(rktPosnX, onS1Y);
+                    Entity rktS2 = Entities.rktS2(rktPosnX, onS2Y);
+                    Entity rktS3 = Entities.rktS3(rktPosnX, onS3Y);
+                    Entity rktCone = Entities.rktCone(rktPosnX, onS3Y -AssetsImg.rktCone.getHeight());
                     rktCone.attatch(rktS3);
-                    rktS3.attatch(Entities.rktFlame(this.width/2, onS3Y +AssetsImg.rktS3.getHeight()));
+                    rktS3.attatch(rktFlameS3 = Entities.rktFlame(this.width/2, onS3Y +AssetsImg.rktS3.getHeight()));
                     rktS3.attatch(rktS2);
-                    rktS2.attatch(Entities.rktFlame(this.width/2, onS2Y +AssetsImg.rktS2.getHeight()));
+                    rktS2.attatch(rktFlameS2 = Entities.rktFlame(this.width/2, onS2Y +AssetsImg.rktS2.getHeight()));
                     rktS2.attatch(rktS1);
-                    rktS1.attatch(Entities.rktBurn(this.width/2, onS1Y +AssetsImg.rktS1.getHeight()));
+                    rktS1.attatch(rktFlameS1 = Entities.rktBurn(this.width/2, onS1Y +AssetsImg.rktS1.getHeight()));
                     env.addEntity(rktCone);
                     env.addEntity(lPad);
                 }
