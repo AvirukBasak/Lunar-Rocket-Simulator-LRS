@@ -19,7 +19,7 @@ public class Environments
         m_Failure = null;
     }
 
-    public static Environment stars(Canvas cv, int x, int y)
+    public static Environment stars(Canvas cv, double x, double y)
     {
         if (m_stars == null) return m_stars = new Environment(cv, AssetsImg.stars, x, y);
         else {
@@ -29,7 +29,7 @@ public class Environments
         }
     }
 
-    public static Environment skyGrad(Canvas cv, int x, int y)
+    public static Environment skyGrad(Canvas cv, double x, double y)
     {
         if (m_skyGrad == null)
             return m_skyGrad = new Environment(cv, AssetsImg.skyGrad, x, y);/*, 0, (int)
@@ -41,7 +41,7 @@ public class Environments
         }
     }
 
-    public static Environment Success(Canvas cv, int x, int y)
+    public static Environment Success(Canvas cv, double x, double y)
     {
         if (m_Success == null) {
             m_Success = new Environment(cv, AssetsImg.Success, x, y);
@@ -53,7 +53,7 @@ public class Environments
         }
     }
 
-    public static Environment Failure(Canvas cv, int x, int y)
+    public static Environment Failure(Canvas cv, double x, double y)
     {
         if (m_Failure == null) {
             m_Failure = new Environment(cv, AssetsImg.Failure, x, y);

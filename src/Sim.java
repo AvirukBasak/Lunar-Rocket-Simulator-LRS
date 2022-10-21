@@ -62,10 +62,11 @@ public class Sim implements Runnable
                     rktS3.attatch(rktS2);
                     rktS2.attatch(rktFlameS2 = Entities.rktFlame(this.width/2, onS2Y +AssetsImg.rktS2.getHeight()));
                     rktS2.attatch(rktS1);
-                    rktS1.attatch(rktFlameS1 = Entities.rktBurn(this.width/2, onS1Y +AssetsImg.rktS1.getHeight()));
+                    rktS1.attatch(rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y +AssetsImg.rktS1.getHeight()));
                     env.addEntity(rktCone);
                     env.addEntity(lPad);
                 }
+
                 break;
             }
         }

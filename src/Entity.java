@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Entity
 {
-    public int x, y;
-    public int xBound, yBound;
+    public double x, y;
+    public double xBound, yBound;
     protected BufferedImage entityImg;
     protected List<Entity> attachments;
 
@@ -24,10 +24,10 @@ public class Entity
     /**
      * An entity is an existence, visualised by its image attribute.
      * @param BufferedImage The attribute image
-     * @param int x coordinate entity
-     * @param int y coordinate entity
+     * @param double x coordinate entity
+     * @param double y coordinate entity
      */
-    public Entity(int x, int y, BufferedImage img)
+    public Entity(double x, double y, BufferedImage img)
     {
         this.isSoft = false;
         this.hidden = false;
@@ -43,27 +43,26 @@ public class Entity
     public void show() { this.hidden = false; }
     /**
      * Updates posn of an entity along with its attachments.
-     * @param int delta-x
-     * @param int delta-y
+     * @param double delta-x
+     * @param double delta-y
      */
-    public void update(int dx, int dy)
+    public void update(double dx, double dy)
     {
         this.x += dx;
         this.y += dy;
-        for (Entity e : this.attachments) {
-            e.x += dx;
-            e.y += dy;
-        }
+        if (this.attachments != null)
+            for (Entity e : this.attachments)
+                e.update(dx, dy);
     }
     /**
      * Moves an entity to absolute posn along with its attachments.
-     * @param int new-x
-     * @param int new-y
+     * @param double new-x
+     * @param double new-y
      */
-    public void move(int x, int y)
+    public void move(double x, double y)
     {
-        int dx = x - this.x;
-        int dy = y - this.y;
+        double dx = x - this.x;
+        double dy = y - this.y;
         this.update(dx, dy);
     }
     /**
@@ -73,7 +72,7 @@ public class Entity
     public void render(Graphics gfx)
     {
         if (hidden) return;
-        gfx.drawImage(this.entityImg, this.x, this.y, null);
+        gfx.drawImage(this.entityImg, (int) this.x, (int) this.y, null);
         if (this.attachments != null)
             for (Entity e : this.attachments)
                 e.render(gfx);

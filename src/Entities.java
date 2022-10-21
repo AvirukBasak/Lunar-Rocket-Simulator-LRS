@@ -53,7 +53,7 @@ public class Entities
         m_lunSurface = null;
     }
 
-    public static Entity rktS1(int x, int y)
+    public static Entity rktS1(double x, double y)
     {
         if (m_rktS1 == null) return m_rktS1 = new Entity(x, y, AssetsImg.rktS1);
         else {
@@ -63,7 +63,7 @@ public class Entities
         }
     }
 
-    public static Entity rktS2(int x, int y)
+    public static Entity rktS2(double x, double y)
     {
         if (m_rktS2 == null) return m_rktS2 = new Entity(x, y, AssetsImg.rktS2);
         else {
@@ -73,7 +73,7 @@ public class Entities
         }
     }
 
-    public static Entity rktS3(int x, int y)
+    public static Entity rktS3(double x, double y)
     {
         if (m_rktS3 == null) return m_rktS3 = new Entity(x, y, AssetsImg.rktS3);
         else {
@@ -83,7 +83,7 @@ public class Entities
         }
     }
 
-    public static Entity rktCone(int x, int y)
+    public static Entity rktCone(double x, double y)
     {
         if (m_rktCone == null) return m_rktCone = new Entity(x, y, AssetsImg.rktCone);
         else {
@@ -93,21 +93,21 @@ public class Entities
         }
     }
 
-    public static Entity rktBurn(int x, int y)
+    public static Entity rktBurn(double x, double y)
     {
         final Entity rktBurn = new Entity(x, y, AssetsImg.rktBurn);
         rktBurn.isSoft = true;
         return rktBurn;
     }
 
-    public static Entity rktFlame(int x, int y)
+    public static Entity rktFlame(double x, double y)
     {
         final Entity rktFlame = new Entity(x, y, AssetsImg.rktFlame);
         rktFlame.isSoft = true;
         return rktFlame;
     }
 
-    public static Entity tower(int x, int y)
+    public static Entity tower(double x, double y)
     {
         if (m_tower == null) return m_tower = new Entity(x, y, AssetsImg.tower);
         else {
@@ -117,7 +117,7 @@ public class Entities
         }
     }
 
-    public static Entity lPad(int x, int y)
+    public static Entity lPad(double x, double y)
     {
         if (m_lPad == null) return m_lPad = new Entity(x, y, AssetsImg.lPad);
         else {
@@ -127,7 +127,7 @@ public class Entities
         }
     }
 
-    public static Entity rktDef(int x, int y)
+    public static Entity rktDef(double x, double y)
     {
         if (m_rktDef == null) return m_rktDef = new Entity(x, y, AssetsImg.rktDef);
         else {
@@ -137,7 +137,7 @@ public class Entities
         }
     }
 
-    public static Entity earth(int x, int y)
+    public static Entity earth(double x, double y)
     {
         if (m_earth == null) return m_earth = new Entity(x, y, AssetsImg.earth);
         else {
@@ -147,7 +147,7 @@ public class Entities
         }
     }
 
-    public static Entity moon(int x, int y)
+    public static Entity moon(double x, double y)
     {
         if (m_moon == null) return m_moon = new Entity(x, y, AssetsImg.moon);
         else {
@@ -157,7 +157,7 @@ public class Entities
         }
     }
 
-    public static Entity rkt(int x, int y)
+    public static Entity rkt(double x, double y)
     {
         if (m_rkt == null) return m_rkt = new Entity(x, y, AssetsImg.rkt);
         else {
@@ -167,7 +167,7 @@ public class Entities
         }
     }
 
-    public static Entity rktCovUp(int x, int y)
+    public static Entity rktCovUp(double x, double y)
     {
         if (m_rktCovUp == null) return m_rktCovUp = new Entity(x, y, AssetsImg.rktCovUp);
         else {
@@ -177,7 +177,7 @@ public class Entities
         }
     }
 
-    public static Entity rktCovDown(int x, int y)
+    public static Entity rktCovDown(double x, double y)
     {
         if (m_rktCovDown == null) return m_rktCovDown = new Entity(x, y, AssetsImg.rktCovDown);
         else {
@@ -187,7 +187,7 @@ public class Entities
         }
     }
 
-    public static Entity payLoad(int x, int y)
+    public static Entity payLoad(double x, double y)
     {
         if (m_payLoad == null) return m_payLoad = new Entity(x, y, AssetsImg.payLoad);
         else {
@@ -197,7 +197,7 @@ public class Entities
         }
     }
 
-    public static Entity landerBrkOff(int x, int y)
+    public static Entity landerBrkOff(double x, double y)
     {
         if (m_landerBrkOff == null) return m_landerBrkOff = new Entity(x, y, AssetsImg.landerBrkOff);
         else {
@@ -207,7 +207,7 @@ public class Entities
         }
     }
 
-    public static Entity moduleRsld(int x, int y)
+    public static Entity moduleRsld(double x, double y)
     {
         if (m_moduleRsld == null) return m_moduleRsld = new Entity(x, y, AssetsImg.moduleRsld);
         else {

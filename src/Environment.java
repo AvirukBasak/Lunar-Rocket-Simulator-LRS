@@ -13,17 +13,17 @@ public class Environment
     protected BufferedImage bg;
     protected BufferStrategy bs;
 
-    protected int x, y, dxEntity, dyEntity, ddxEntity, ddyEntity;
+    protected double x, y, dxEntity, dyEntity, ddxEntity, ddyEntity;
     protected List<Entity> entities;
 
     /**
      * A env is a collection of many entites.
      * @param Canvas The canvas where the env is drawn
      * @param BufferedImage The background image
-     * @param int x coordinate of env bg
-     * @param int y coordinate of env bg
+     * @param double x coordinate of env bg
+     * @param double y coordinate of env bg
      */
-    public Environment(Canvas canvas, BufferedImage bg, int x, int y)
+    public Environment(Canvas canvas, BufferedImage bg, double x, double y)
     {
         this.bg = bg;
         this.x = x;
@@ -46,12 +46,12 @@ public class Environment
      * A env is a collection of many entites.
      * @param Canvas The canvas where the env is drawn
      * @param BufferedImage The background image
-     * @param int x coordinate of env bg
-     * @param int y coordinate of env bg
-     * @param int default x acceleration of that system due to some potential gradient, pixel/frame2
-     * @param int default y acceleration of that system due to some potential gradient, pixel/frame2
+     * @param double x coordinate of env bg
+     * @param double y coordinate of env bg
+     * @param double default x acceleration of that system due to some potential gradient, pixel/frame2
+     * @param double default y acceleration of that system due to some potential gradient, pixel/frame2
      */
-    public Environment(Canvas canvas, BufferedImage bg, int x, int y, int ddx, int ddy, boolean hasGround)
+    public Environment(Canvas canvas, BufferedImage bg, double x, double y, double ddx, double ddy, boolean hasGround)
     {
         this.bg = bg;
         this.x = x;
@@ -84,10 +84,10 @@ public class Environment
     /**
      * Update the env, keeps entities static.
      * Useful for motion in POV of entities.
-     * @param int delta-x
-     * @param int delta-y
+     * @param double delta-x
+     * @param double delta-y
      */
-    public void update(int dx, int dy)
+    public void update(double dx, double dy)
     {
         this.x += dx;
         this.y += dy;
@@ -95,39 +95,39 @@ public class Environment
     /**
      * Update the env with entites.
      * Useful for motion in POV of player.
-     * @param int delta-x
-     * @param int delta-y
+     * @param double delta-x
+     * @param double delta-y
      * @param boolean movEntities
      */
-    public void update(int dx, int dy, boolean movEntities)
+    public void update(double dx, double dy, boolean movEntities)
     {
         this.x += dx;
         this.y += dy;
-        if (movEntities)
+        if (movEntities && this.entities != null)
             for (Entity e : this.entities)
                 e.update(dx, dy);
     }
     /**
      * Update the env by absolute position.
-     * @param int new-x
-     * @param int new-y
+     * @param double new-x
+     * @param double new-y
      */
-    public void move(int x, int y)
+    public void move(double x, double y)
     {
-        int dx = x - this.x;
-        int dy = y - this.y;
+        double dx = x - this.x;
+        double dy = y - this.y;
         this.update(dx, dy);
     }
     /**
      * Update the env with enties by absolute position.
-     * @param int new-x
-     * @param int new-y
+     * @param double new-x
+     * @param double new-y
      * @param boolean movEntities
      */
-    public void move(int x, int y, boolean movEntities)
+    public void move(double x, double y, boolean movEntities)
     {
-        int dx = x - this.x;
-        int dy = y - this.y;
+        double dx = x - this.x;
+        double dy = y - this.y;
         this.update(dx, dy, true);
     }
     /**
@@ -137,7 +137,7 @@ public class Environment
     {
         Graphics gfx = this.bs.getDrawGraphics();
         gfx.clearRect(0, 0, this.width, this.height);
-        gfx.drawImage(this.bg, this.x, this.y, null);
+        gfx.drawImage(this.bg, (int) this.x, (int) this.y, null);
         if (this.entities != null)
             for (Entity e : this.entities) {
                 if (this.hasGround
