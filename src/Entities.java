@@ -5,8 +5,6 @@ public class Entities
     protected static Entity m_rktS2;           // Earth stg 2
     protected static Entity m_rktS3;           // Earth stg 3
     protected static Entity m_rktCone;         // Earth top cone
-    protected static Entity m_rktBurn;         // Earth rocket fire burn
-    protected static Entity m_rktFlame;        // Rocket flame
     protected static Entity m_tower;           // Launch tower
     protected static Entity m_lPad;            // Launch pad
     protected static Entity m_rktDef;          // Dot representing pos of rocket
@@ -35,8 +33,6 @@ public class Entities
         m_rktS2 = null;
         m_rktS3 = null;
         m_rktCone = null;
-        m_rktBurn = null;
-        m_rktFlame = null;
         m_tower = null;
         m_lPad = null;
         m_rktDef = null;
@@ -99,22 +95,16 @@ public class Entities
 
     public static Entity rktBurn(int x, int y)
     {
-        if (m_rktBurn == null) return m_rktBurn = new Entity(x, y, AssetsImg.rktBurn);
-        else {
-            m_rktBurn.x = x;
-            m_rktBurn.y = y;
-            return m_rktBurn;
-        }
+        final Entity rktBurn = new Entity(x, y, AssetsImg.rktBurn);
+        rktBurn.isSoft = true;
+        return rktBurn;
     }
 
     public static Entity rktFlame(int x, int y)
     {
-        if (m_rktFlame == null) return m_rktFlame = new Entity(x, y, AssetsImg.rktFlame);
-        else {
-            m_rktFlame.x = x;
-            m_rktFlame.y = y;
-            return m_rktFlame;
-        }
+        final Entity rktFlame = new Entity(x, y, AssetsImg.rktFlame);
+        rktFlame.isSoft = true;
+        return rktFlame;
     }
 
     public static Entity tower(int x, int y)
