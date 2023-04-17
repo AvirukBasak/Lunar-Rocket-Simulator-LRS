@@ -332,14 +332,14 @@ public class Console implements Runnable
                 if (command.equalsIgnoreCase("exit")) {
                     AssetsVars.quit = true;
                     running = false;
-                    th.stop();
+                    this.stopHelper();
                 }
             } catch (Exception e) {
                 System.out.println("\r[E] " + e);
                 System.out.println("\r    User input error. Please try again");
             }
         }
-        th.stop();
+        this.stopHelper();
     }
 
     //Method responsible for starting thread.
@@ -352,8 +352,7 @@ public class Console implements Runnable
         th.start();
     }
 
-    //Method responsible for stopping thread
-    public synchronized void stop()
+    public synchronized void stopHelper()
     {
         if (!running)
             return;
@@ -364,6 +363,12 @@ public class Console implements Runnable
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    //Method responsible for stopping thread
+    public synchronized void stop()
+    {
+        this.stopHelper();
     }
 
     //Event actions

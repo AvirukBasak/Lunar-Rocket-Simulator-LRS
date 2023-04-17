@@ -25,7 +25,7 @@ elif [ "$1" = "cleaner" ]; then
     exit 0
 elif [ "$1" = "" ]; then
     echo "running javac on $SRC/*.java"
-    javac -sourcepath "$SRC" -d "$BUILD" -h "$BUILD" $(find "$SRC/" -name "*.java")
+    javac -Xlint:deprecation -sourcepath "$SRC" -d "$BUILD" -h "$BUILD" $(find "$SRC/" -name "*.java")
     exitcode=$?
     cp -r "$SRC/res" "$BUILD/"
     echo "entered dir $BUILD"

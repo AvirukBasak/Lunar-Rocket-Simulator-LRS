@@ -58,8 +58,7 @@ public class Entities
     {
         if (m_rktS1 == null) return m_rktS1 = new Entity(x, y, AssetsImg.rktS1);
         else {
-            m_rktS1.x = x;
-            m_rktS1.y = y;
+            m_rktS1.move(x, y);
             return m_rktS1;
         }
     }
@@ -68,8 +67,7 @@ public class Entities
     {
         if (m_rktS2 == null) return m_rktS2 = new Entity(x, y, AssetsImg.rktS2);
         else {
-            m_rktS2.x = x;
-            m_rktS2.y = y;
+            m_rktS2.move(x, y);
             return m_rktS2;
         }
     }
@@ -78,8 +76,7 @@ public class Entities
     {
         if (m_rktS3 == null) return m_rktS3 = new Entity(x, y, AssetsImg.rktS3);
         else {
-            m_rktS3.x = x;
-            m_rktS3.y = y;
+            m_rktS3.move(x, y);
             return m_rktS3;
         }
     }
@@ -88,8 +85,7 @@ public class Entities
     {
         if (m_rktCone == null) return m_rktCone = new Entity(x, y, AssetsImg.rktCone);
         else {
-            m_rktCone.x = x;
-            m_rktCone.y = y;
+            m_rktCone.move(x, y);
             return m_rktCone;
         }
     }
@@ -112,8 +108,7 @@ public class Entities
     {
         if (m_tower == null) return m_tower = new Entity(x, y, AssetsImg.tower);
         else {
-            m_tower.x = x;
-            m_tower.y = y;
+            m_tower.move(x, y);
             return m_tower;
         }
     }
@@ -122,8 +117,7 @@ public class Entities
     {
         if (m_lPad == null) return m_lPad = new Entity(x, y, AssetsImg.lPad);
         else {
-            m_lPad.x = x;
-            m_lPad.y = y;
+            m_lPad.move(x, y);
             return m_lPad;
         }
     }
@@ -132,8 +126,7 @@ public class Entities
     {
         if (m_rktDef == null) return m_rktDef = new Entity(x, y, AssetsImg.rktDef);
         else {
-            m_rktDef.x = x;
-            m_rktDef.y = y;
+            m_rktDef.move(x, y);
             return m_rktDef;
         }
     }
@@ -142,8 +135,7 @@ public class Entities
     {
         if (m_earth == null) return m_earth = new Entity(x, y, AssetsImg.earth);
         else {
-            m_earth.x = x;
-            m_earth.y = y;
+            m_earth.move(x, y);
             return m_earth;
         }
     }
@@ -152,8 +144,7 @@ public class Entities
     {
         if (m_moon == null) return m_moon = new Entity(x, y, AssetsImg.moon);
         else {
-            m_moon.x = x;
-            m_moon.y = y;
+            m_moon.move(x, y);
             return m_moon;
         }
     }
@@ -162,8 +153,7 @@ public class Entities
     {
         if (m_rkt == null) return m_rkt = new Entity(x, y, AssetsImg.rkt);
         else {
-            m_rkt.x = x;
-            m_rkt.y = y;
+            m_rkt.move(x, y);
             return m_rkt;
         }
     }
@@ -172,8 +162,7 @@ public class Entities
     {
         if (m_rktCovUp == null) return m_rktCovUp = new Entity(x, y, AssetsImg.rktCovUp);
         else {
-            m_rktCovUp.x = x;
-            m_rktCovUp.y = y;
+            m_rktCovUp.move(x, y);
             return m_rktCovUp;
         }
     }
@@ -182,8 +171,7 @@ public class Entities
     {
         if (m_rktCovDown == null) return m_rktCovDown = new Entity(x, y, AssetsImg.rktCovDown);
         else {
-            m_rktCovDown.x = x;
-            m_rktCovDown.y = y;
+            m_rktCovDown.move(x, y);
             return m_rktCovDown;
         }
     }
@@ -192,8 +180,7 @@ public class Entities
     {
         if (m_payLoad == null) return m_payLoad = new Entity(x, y, AssetsImg.payLoad);
         else {
-            m_payLoad.x = x;
-            m_payLoad.y = y;
+            m_payLoad.move(x, y);
             return m_payLoad;
         }
     }
@@ -202,8 +189,7 @@ public class Entities
     {
         if (m_landerBrkOff == null) return m_landerBrkOff = new Entity(x, y, AssetsImg.landerBrkOff);
         else {
-            m_landerBrkOff.x = x;
-            m_landerBrkOff.y = y;
+            m_landerBrkOff.move(x, y);
             return m_landerBrkOff;
         }
     }
@@ -212,8 +198,7 @@ public class Entities
     {
         if (m_moduleRsld == null) return m_moduleRsld = new Entity(x, y, AssetsImg.moduleRsld);
         else {
-            m_moduleRsld.x = x;
-            m_moduleRsld.y = y;
+            m_moduleRsld.move(x, y);
             return m_moduleRsld;
         }
     }

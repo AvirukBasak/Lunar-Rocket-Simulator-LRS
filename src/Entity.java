@@ -98,7 +98,7 @@ public class Entity
         if (this.attachments != null) try {
             this.attachments.remove(e);
         } catch(Exception ex) {
-            e.printStackTrace();
+            ex.printStackTrace();
         }
     }
     /**
@@ -114,5 +114,23 @@ public class Entity
             for (Entity e : this.attachments)
                 e.flush();
         this.attachments = null;
+    }
+
+    public int getWidth()
+    {
+        return this.entityImg.getWidth();
+    }
+    public int getHeight()
+    {
+        return this.entityImg.getHeight();
+    }
+
+    public int getX()
+    {
+        return (int) this.x;
+    }
+    public int getY()
+    {
+        return (int) this.y;
     }
 }
