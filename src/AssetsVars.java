@@ -2,21 +2,23 @@ public class AssetsVars
 {
     // quit flag
     protected static boolean quit = false;
+
     // boolean markers
-    protected static byte activity = 0;
+    protected static Activities activity = Activities.BELOW_KARMAN;
+
     // frames, updates and observation clock
     protected static final int FPS = 60;
     protected static final int UPS = 60;
     static protected final double secPerFrame = 1/60;
     protected static double obsTime = 0;
+
     // Time warp factor
     protected static double warpF = 1;
+
     // scale factor
     static final double meterPerPixel = 5.7657657657657655;
     static final double pixelPerMeter = 0.1734375;
     static final double scaleF = pixelPerMeter;
-    // control command
-    static String command;
 
     // Variables for Rocket equation
     protected static final double G_mEarth = 6.6726 * Math.exp(-11) * 5.972 * Math.exp(24);  // G * Mass(earth)

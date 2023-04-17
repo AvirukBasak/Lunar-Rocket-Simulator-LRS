@@ -43,9 +43,10 @@ public class Console implements Runnable
     protected Thread th;
     protected boolean running = false;
 
-    protected static String read()
+    protected String read()
     {
-        BufferedReader stdin = new BufferedReader(new java.io.InputStreamReader(System.in));
+        BufferedReader stdin = new BufferedReader(
+            new java.io.InputStreamReader(System.in));
         try {
             return stdin.readLine();
         } catch (java.io.IOException ex) {
@@ -54,22 +55,27 @@ public class Console implements Runnable
         return null;
     }
 
-    protected static void write(String str)
-    {
-        System.out.println(str);
-    }
-
     protected String readCommand()
     {
-        BufferedReader stdin = new BufferedReader(new java.io.InputStreamReader(System.in));
+        BufferedReader stdin = new BufferedReader(
+            new java.io.InputStreamReader(System.in));
         try {
             System.out.print("\nLRS shell> ");
-            AssetsVars.command = stdin.readLine().trim();
-            return AssetsVars.command;
+            try {
+                return stdin.readLine().trim();
+            } catch (NullPointerException ex) {
+                System.out.println();
+                System.exit(0);
+            }
         } catch (java.io.IOException ex) {
             System.out.println(ex.toString());
         }
         return null;
+    }
+
+    protected void write(String str)
+    {
+        System.out.println(str);
     }
 
     /*private void evaluate(String command) throws Exception {
@@ -320,18 +326,20 @@ public class Console implements Runnable
     public void run()
     {
         while (running) {
-            if (!readCommand().equalsIgnoreCase("")) try {
+            String command = readCommand();
+            if (!command.equalsIgnoreCase("")) try {
                 // evaluate(AssetsVars.command);
-                if (AssetsVars.command.equalsIgnoreCase("exit")) {
+                if (command.equalsIgnoreCase("exit")) {
                     AssetsVars.quit = true;
                     running = false;
+                    th.stop();
                 }
             } catch (Exception e) {
                 System.out.println("\r[E] " + e);
                 System.out.println("\r    User input error. Please try again");
             }
         }
-        stop();
+        th.stop();
     }
 
     //Method responsible for starting thread.
@@ -350,9 +358,8 @@ public class Console implements Runnable
         if (!running)
             return;
         running = false;
-        if (running) try {
+        try {
             th.join();
-            System.exit(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
             System.exit(1);
