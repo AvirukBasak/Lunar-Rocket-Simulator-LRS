@@ -99,6 +99,7 @@ public class Entity
             this.attachments.remove(e);
         } catch(Exception ex) {
             ex.printStackTrace();
+            System.exit(1);
         }
     }
     /**

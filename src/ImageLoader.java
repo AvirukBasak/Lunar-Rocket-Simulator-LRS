@@ -15,8 +15,9 @@ public class ImageLoader
          */
         try {
             return ImageIO.read(ImageLoader.class.getResourceAsStream(path));
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(IOException ex) {
+            ex.printStackTrace();
+            System.exit(1);
         }
         return null;
     }

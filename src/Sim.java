@@ -64,7 +64,7 @@ public class Sim implements Runnable
                     rktS2.attatch(rktS1);
                     rktS1.attatch(rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y +AssetsImg.rktS1.getHeight()));
                     env.addEntity(rktCone);
-                    lPad.flush();
+                    // lPad.flush();
                     env.focusOn(rktCone);
                     rktFlameS1.hide();
                 }
@@ -147,10 +147,11 @@ public class Sim implements Runnable
         if (!running)
             return;
         running = false;
+        AssetsVars.quit = true;
         try {
             th.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
             System.exit(1);
         }
     }

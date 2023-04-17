@@ -50,7 +50,8 @@ public class Console implements Runnable
         try {
             return stdin.readLine();
         } catch (java.io.IOException ex) {
-            System.out.println(ex.toString());
+            ex.printStackTrace();
+            System.exit(1);
         }
         return null;
     }
@@ -65,12 +66,13 @@ public class Console implements Runnable
                 return stdin.readLine().trim();
             } catch (NullPointerException ex) {
                 System.out.println();
-                System.exit(0);
+                return "exit";
             }
         } catch (java.io.IOException ex) {
-            System.out.println(ex.toString());
+            ex.printStackTrace();
+            System.exit(1);
         }
-        return null;
+        return "";
     }
 
     public static void write(String str)
@@ -328,14 +330,13 @@ public class Console implements Runnable
         while (running) {
             String command = readCommand();
             if (!command.equalsIgnoreCase("")) try {
-                // evaluate(AssetsVars.command);
+                // evaluate(command);
                 if (command.equalsIgnoreCase("exit")) {
-                    AssetsVars.quit = true;
-                    running = false;
-                    this.stopHelper();
+                    System.exit(0);
+                    return;
                 }
-            } catch (Exception e) {
-                System.out.println("\r[E] " + e);
+            } catch (Exception ex) {
+                System.out.println("\r[E] " + ex);
                 System.out.println("\r    User input error. Please try again");
             }
         }
@@ -357,10 +358,11 @@ public class Console implements Runnable
         if (!running)
             return;
         running = false;
+        AssetsVars.quit = true;
         try {
             th.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
             System.exit(1);
         }
     }

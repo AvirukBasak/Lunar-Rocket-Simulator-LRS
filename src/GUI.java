@@ -15,19 +15,19 @@ final class GUI extends JFrame
     // UI object declarations.
     private Canvas cnvsSpace;
 
-    public GUI(String title,int width, int height)
+    public GUI(String title, int width, int height)
     {
         this.title = title;
         this.width = width;
         this.height = height;
 
-        // set LookAndFeel, using default look and feel, gnome and windows supported
+        // Set LookAndFeel, using default look and feel, gnome and windows supported
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");     // LINUX UI
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex){
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");     // Linux UI
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             try {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");     // Windows UI
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {}
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex2) {}
         }
         createUI();
     }
