@@ -7,7 +7,7 @@ public class SpriteSheet
 
     public SpriteSheet(BufferedImage bfSheet)
     {
-        this.bfSheet=bfSheet;
+        this.bfSheet = bfSheet;
     }
 
     public BufferedImage Crop(int x, int y, int width, int height)

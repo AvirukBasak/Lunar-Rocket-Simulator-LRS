@@ -16,8 +16,7 @@ public class ImageLoader
         try {
             return ImageIO.read(ImageLoader.class.getResourceAsStream(path));
         } catch(IOException e) {
-            System.out.println("ERROR OCCURED: "+e.toString());
-            System.exit(0);
+            e.printStackTrace();
         }
         return null;
     }

@@ -15,6 +15,5 @@ class Main
         if (args.length >= 1)
             Sim.noGUI = args[0].equalsIgnoreCase("-noGUI");
         new Sim("Lunar Space Simulator LRS", 768, 582).start();
-        new Console().start();
     }
 }
