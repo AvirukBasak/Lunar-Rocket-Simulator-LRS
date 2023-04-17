@@ -37,11 +37,11 @@ public class AssetsImg
     public static BufferedImage lander128B;      // lander lands seen from close, eng burn
     public static BufferedImage lunSurface;
 
-    public static BufferedImage Success;
-    public static BufferedImage Failure;
+    public static BufferedImage success;
+    public static BufferedImage failure;
 
     // Global object declaration of SpriteSheet class.
-    private static SpriteSheet lander0x0, launchPad12x2, Launchtower1x7, module4x3, payloadRsl0x0, planets4x4, points, releases4x3, rockets1x7;
+    private static SpriteSheet lander0x0, launchPad12x2, launchtower1x7, module4x3, payloadRsl0x0, planets4x4, points, releases4x3, rockets1x7;
 
     // Global variable declaratons.
     private static final int WIDTH = 64, HEIGHT = 64;
@@ -53,7 +53,7 @@ public class AssetsImg
 
         // Define SpriteSheet object.
         launchPad12x2 = new SpriteSheet(ImageLoader.loadImage("res/launchPad12x2.png"));
-        Launchtower1x7 = new SpriteSheet(ImageLoader.loadImage("res/Launchtower1x7.png"));
+        launchtower1x7 = new SpriteSheet(ImageLoader.loadImage("res/launchtower1x7.png"));
         payloadRsl0x0 = new SpriteSheet(ImageLoader.loadImage("res/payloadRsl0x0.png"));
         points = new SpriteSheet(ImageLoader.loadImage("res/points.png"));
         releases4x3 = new SpriteSheet(ImageLoader.loadImage("res/releases4x3.png"));
@@ -67,7 +67,7 @@ public class AssetsImg
         rktBurn = rockets1x7.Crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 2*HEIGHT);
         rktFlame = new SpriteSheet(ImageLoader.loadImage("res/flame.png")).Crop(0 * WIDTH, 0 * HEIGHT, 32, 95);
 
-        tower = Launchtower1x7.Crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 7*HEIGHT);
+        tower = launchtower1x7.Crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 7*HEIGHT);
 
         lPad = launchPad12x2.Crop(0*WIDTH, 0*HEIGHT, 12*WIDTH, 2*HEIGHT);
 
