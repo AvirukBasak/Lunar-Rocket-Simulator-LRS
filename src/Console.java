@@ -40,10 +40,10 @@ import java.util.StringTokenizer;
 
 public class Console implements Runnable
 {
-    protected Thread th;
-    protected boolean running = false;
+    private Thread th;
+    private boolean running = false;
 
-    protected String read()
+    public static String read()
     {
         BufferedReader stdin = new BufferedReader(
             new java.io.InputStreamReader(System.in));
@@ -55,7 +55,7 @@ public class Console implements Runnable
         return null;
     }
 
-    protected String readCommand()
+    public static String readCommand()
     {
         BufferedReader stdin = new BufferedReader(
             new java.io.InputStreamReader(System.in));
@@ -73,7 +73,7 @@ public class Console implements Runnable
         return null;
     }
 
-    protected void write(String str)
+    public static void write(String str)
     {
         System.out.println(str);
     }

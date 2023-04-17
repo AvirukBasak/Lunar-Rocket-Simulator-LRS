@@ -2,43 +2,43 @@ import java.awt.image.BufferedImage;
 
 public class AssetsImg
 {
-    protected static boolean init = false;
+    private static boolean init = false;
     /* Global BufferedImage object declarations,
      * each object is used to store 1 image.
      */
-    protected static BufferedImage rktS1;           // Earth stg 1
-    protected static BufferedImage rktS2;           // Earth stg 2
-    protected static BufferedImage rktS3;           // Earth stg 3
-    protected static BufferedImage rktCone;         // Earth top cone
-    protected static BufferedImage rktBurn;         // Earth rocket fire burn
-    protected static BufferedImage rktFlame;        // Rocket flame
-    protected static BufferedImage tower;           // Launch tower
-    protected static BufferedImage lPad;            // Launch pad
+    public static BufferedImage rktS1;           // Earth stg 1
+    public static BufferedImage rktS2;           // Earth stg 2
+    public static BufferedImage rktS3;           // Earth stg 3
+    public static BufferedImage rktCone;         // Earth top cone
+    public static BufferedImage rktBurn;         // Earth rocket fire burn
+    public static BufferedImage rktFlame;        // Rocket flame
+    public static BufferedImage tower;           // Launch tower
+    public static BufferedImage lPad;            // Launch pad
 
-    protected static BufferedImage rktDef;          // Dot representing pos of rocket
+    public static BufferedImage rktDef;          // Dot representing pos of rocket
 
-    protected static BufferedImage earth;
-    protected static BufferedImage moon;
+    public static BufferedImage earth;
+    public static BufferedImage moon;
 
-    protected static BufferedImage stars;           // Stars
-    protected static BufferedImage skyGrad;         // Sky
+    public static BufferedImage stars;           // Stars
+    public static BufferedImage skyGrad;         // Sky
 
-    protected static BufferedImage rkt;             // Rocket body while payload ejection
-    protected static BufferedImage rktCovUp;        // Payload Upper Cover
-    protected static BufferedImage rktCovDown;      // Payload Lower Cover
-    protected static BufferedImage payLoad;         // Payload ie Module and lander
-    protected static BufferedImage landerBrkOff;    // lander breaks off module
-    protected static BufferedImage moduleRsld;      // Module released of lander and left behind
-    protected static BufferedImage landerRsldF;     // lander released, eng off
-    protected static BufferedImage landerRsldB;     // lander released, eng burn
-    protected static BufferedImage lander64F;       // lander lands seen from dist, eng off
-    protected static BufferedImage lander64B;       // lander lands seen from dist, eng burn
-    protected static BufferedImage lander128F;      // lander lands seen from close, eng off
-    protected static BufferedImage lander128B;      // lander lands seen from close, eng burn
-    protected static BufferedImage lunSurface;
+    public static BufferedImage rkt;             // Rocket body while payload ejection
+    public static BufferedImage rktCovUp;        // Payload Upper Cover
+    public static BufferedImage rktCovDown;      // Payload Lower Cover
+    public static BufferedImage payLoad;         // Payload ie Module and lander
+    public static BufferedImage landerBrkOff;    // lander breaks off module
+    public static BufferedImage moduleRsld;      // Module released of lander and left behind
+    public static BufferedImage landerRsldF;     // lander released, eng off
+    public static BufferedImage landerRsldB;     // lander released, eng burn
+    public static BufferedImage lander64F;       // lander lands seen from dist, eng off
+    public static BufferedImage lander64B;       // lander lands seen from dist, eng burn
+    public static BufferedImage lander128F;      // lander lands seen from close, eng off
+    public static BufferedImage lander128B;      // lander lands seen from close, eng burn
+    public static BufferedImage lunSurface;
 
-    protected static BufferedImage Success;
-    protected static BufferedImage Failure;
+    public static BufferedImage Success;
+    public static BufferedImage Failure;
 
     // Global object declaration of SpriteSheet class.
     private static SpriteSheet lander0x0, launchPad12x2, Launchtower1x7, module4x3, payloadRsl0x0, planets4x4, points, releases4x3, rockets1x7;

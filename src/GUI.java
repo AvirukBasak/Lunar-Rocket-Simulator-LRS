@@ -9,11 +9,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 final class GUI extends JFrame
 {
     // Variable declarations.
-    protected final String title;
-    protected final int width, height;
+    private final String title;
+    private final int width, height;
 
     // UI object declarations.
-    protected Canvas cnvs_space;
+    private Canvas cnvsSpace;
 
     public GUI(String title,int width, int height)
     {
@@ -33,10 +33,10 @@ final class GUI extends JFrame
     }
 
     // Creates the UI with window and components
-    protected void createUI()
+    public void createUI()
     {
         // UI object definations.
-        cnvs_space = new Canvas();
+        cnvsSpace = new Canvas();
 
         // JFrame frame properties.
         setTitle("Lunar Rocket Sim LRS");
@@ -48,19 +48,29 @@ final class GUI extends JFrame
         setLocationRelativeTo(null);
         setLayout(null);
 
-        // Canvas cnvs_space properties.
-        cnvs_space.setBounds(0, 0, width, height);
-        cnvs_space.setMinimumSize(new Dimension(width-256, height-128));
-        cnvs_space.setBackground(Color.black);
+        // Canvas cnvsSpace properties.
+        cnvsSpace.setBounds(0, 0, width, height);
+        cnvsSpace.setMinimumSize(new Dimension(width-256, height-128));
+        cnvsSpace.setBackground(Color.black);
 
         // JFrame frame adding components.
-        add(cnvs_space);
+        add(cnvsSpace);
         setVisible(true);
     }
 
-    // Getter for Canvas cnvs_space.
-    protected Canvas getCanvas()
+    // Getter for Canvas cnvsSpace.
+    public Canvas getCanvas()
     {
-        return cnvs_space;
+        return cnvsSpace;
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public int geHeight()
+    {
+        return height;
     }
 }

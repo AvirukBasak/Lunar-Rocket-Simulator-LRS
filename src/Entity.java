@@ -5,21 +5,20 @@ import java.util.ArrayList;
 
 public class Entity
 {
-    public double x, y;
-    public double xBound, yBound;
-    protected BufferedImage entityImg;
-    protected List<Entity> attachments;
+    private double x, y;
+    private double xBound, yBound;
+    private BufferedImage entityImg;
+    private List<Entity> attachments;
+    private Entity parent;
+    private boolean hidden;
 
     protected Environment env;
-    protected Entity parent;
 
     /**
      * A soft entity cannot interact with any other entity.
      * Comes into play during collision detection.
      */
     protected boolean isSoft;
-
-    protected boolean hidden;
 
     /**
      * An entity is an existence, visualised by its image attribute.
@@ -38,6 +37,8 @@ public class Entity
         this.xBound = img.getWidth();
         this.yBound = img.getHeight();
         this.attachments = null;
+        this.parent = null;
+        this.env = null;
     }
     public void hide() { this.hidden = true; }
     public void show() { this.hidden = false; }
@@ -96,7 +97,9 @@ public class Entity
     {
         if (this.attachments != null) try {
             this.attachments.remove(e);
-        } catch(Exception ex) {}
+        } catch(Exception ex) {
+            e.printStackTrace();
+        }
     }
     /**
      * Flush entity resources along with its attachments

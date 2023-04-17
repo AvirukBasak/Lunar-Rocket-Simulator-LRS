@@ -1,29 +1,29 @@
 public class Entities
 {
-    protected static boolean init = false;
+    private static boolean init = false;
 
-    protected static Entity m_rktS1;           // Earth stg 1
-    protected static Entity m_rktS2;           // Earth stg 2
-    protected static Entity m_rktS3;           // Earth stg 3
-    protected static Entity m_rktCone;         // Earth top cone
-    protected static Entity m_tower;           // Launch tower
-    protected static Entity m_lPad;            // Launch pad
-    protected static Entity m_rktDef;          // Dot representing pos of rocket
-    protected static Entity m_earth;
-    protected static Entity m_moon;
-    protected static Entity m_rkt;             // Rocket body while payload ejection
-    protected static Entity m_rktCovUp;        // Payload Upper Cover
-    protected static Entity m_rktCovDown;      // Payload Lower Cover
-    protected static Entity m_payLoad;         // Payload ie Module and lander
-    protected static Entity m_landerBrkOff;    // lander breaks off module
-    protected static Entity m_moduleRsld;      // Module released of lander and left behind
-    protected static Entity m_landerRsldF;     // lander released, eng off
-    protected static Entity m_landerRsldB;     // lander released, eng burn
-    protected static Entity m_lander64F;       // lander lands seen from dist, eng off
-    protected static Entity m_lander64B;       // lander lands seen from dist, eng burn
-    protected static Entity m_lander128F;      // lander lands seen from close, eng off
-    protected static Entity m_lander128B;      // lander lands seen from close, eng burn
-    protected static Entity m_lunSurface;      // moon surface
+    private static Entity m_rktS1;           // Earth stg 1
+    private static Entity m_rktS2;           // Earth stg 2
+    private static Entity m_rktS3;           // Earth stg 3
+    private static Entity m_rktCone;         // Earth top cone
+    private static Entity m_tower;           // Launch tower
+    private static Entity m_lPad;            // Launch pad
+    private static Entity m_rktDef;          // Dot representing pos of rocket
+    private static Entity m_earth;
+    private static Entity m_moon;
+    private static Entity m_rkt;             // Rocket body while payload ejection
+    private static Entity m_rktCovUp;        // Payload Upper Cover
+    private static Entity m_rktCovDown;      // Payload Lower Cover
+    private static Entity m_payLoad;         // Payload ie Module and lander
+    private static Entity m_landerBrkOff;    // lander breaks off module
+    private static Entity m_moduleRsld;      // Module released of lander and left behind
+    private static Entity m_landerRsldF;     // lander released, eng off
+    private static Entity m_landerRsldB;     // lander released, eng burn
+    private static Entity m_lander64F;       // lander lands seen from dist, eng off
+    private static Entity m_lander64B;       // lander lands seen from dist, eng burn
+    private static Entity m_lander128F;      // lander lands seen from close, eng off
+    private static Entity m_lander128B;      // lander lands seen from close, eng burn
+    private static Entity m_lunSurface;      // moon surface
 
     public static void initiate()
     {
