@@ -19,13 +19,41 @@ public class Environments
         m_failure = null;
     }
 
+    public static Environment stars(Canvas cv)
+    {
+        if (m_stars == null)
+            return m_stars = new Environment(cv, AssetsImg.stars);
+        return m_stars;
+    }
+
+    public static Environment skyGrad(Canvas cv)
+    {
+        if (m_skyGrad == null)
+            return m_skyGrad = new Environment(cv, AssetsImg.skyGrad, 0,
+                10 * AssetsVars.PIXEL_PER_MTR / (AssetsVars.FPS * AssetsVars.FPS), true);
+        return m_skyGrad;
+    }
+
+    public static Environment success(Canvas cv)
+    {
+        if (m_success == null)
+            return m_success = new Environment(cv, AssetsImg.success);
+        return m_success;
+    }
+
+    public static Environment failure(Canvas cv)
+    {
+        if (m_failure == null)
+            return m_failure = new Environment(cv, AssetsImg.failure);
+        return m_failure;
+    }
+
     public static Environment stars(Canvas cv, double x, double y)
     {
-        if (m_stars == null) return m_stars = new Environment(cv, AssetsImg.stars, x, y);
-        else {
-            m_stars.move(x, y);
-            return m_stars;
-        }
+        if (m_stars == null)
+            return m_stars = new Environment(cv, AssetsImg.stars, x, y);
+        m_stars.move(x, y);
+        return m_stars;
     }
 
     public static Environment skyGrad(Canvas cv, double x, double y)
@@ -33,31 +61,23 @@ public class Environments
         if (m_skyGrad == null)
             return m_skyGrad = new Environment(cv, AssetsImg.skyGrad, x, y, 0,
                 10 * AssetsVars.PIXEL_PER_MTR / (AssetsVars.FPS * AssetsVars.FPS), true);
-        else {
-            m_skyGrad.move(x, y);
-            return m_skyGrad;
-        }
+        m_skyGrad.move(x, y);
+        return m_skyGrad;
     }
 
     public static Environment success(Canvas cv, double x, double y)
     {
-        if (m_success == null) {
-            m_success = new Environment(cv, AssetsImg.success, x, y);
-            return m_success;
-        } else {
-            m_success.move(x, y);
-            return m_success;
-        }
+        if (m_success == null)
+            return m_success = new Environment(cv, AssetsImg.success, x, y);
+        m_success.move(x, y);
+        return m_success;
     }
 
     public static Environment failure(Canvas cv, double x, double y)
     {
-        if (m_failure == null) {
-            m_failure = new Environment(cv, AssetsImg.failure, x, y);
-            return m_failure;
-        } else {
-            m_failure.move(x, y);
-            return m_failure;
-        }
+        if (m_failure == null)
+            return m_failure = new Environment(cv, AssetsImg.failure, x, y);
+        m_failure.move(x, y);
+        return m_failure;
     }
 }

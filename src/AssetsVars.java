@@ -1,7 +1,7 @@
 public class AssetsVars
 {
-    // quit flag
-    public static boolean quit = false;
+    // running flag
+    public static boolean running = false;
 
     // boolean markers
     public static Activities activity = Activities.BELOW_KARMAN;

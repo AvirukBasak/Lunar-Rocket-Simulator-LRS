@@ -40,10 +40,10 @@ import java.util.StringTokenizer;
 
 public class Console implements Runnable
 {
-    private Thread th;
+    private Thread thread;
     private boolean running = false;
 
-    public static String read()
+    public String read()
     {
         BufferedReader stdin = new BufferedReader(
             new java.io.InputStreamReader(System.in));
@@ -56,7 +56,7 @@ public class Console implements Runnable
         return null;
     }
 
-    public static String readCommand()
+    public String readCommand()
     {
         BufferedReader stdin = new BufferedReader(
             new java.io.InputStreamReader(System.in));
@@ -75,9 +75,14 @@ public class Console implements Runnable
         return "";
     }
 
-    public static void write(String str)
+    public void write(String str)
     {
-        System.out.println(str);
+        System.out.print(str);
+    }
+
+    public void writeln(String str)
+    {
+        System.out.println("\r" + str);
     }
 
     /*private void evaluate(String command) throws Exception {
@@ -96,7 +101,7 @@ public class Console implements Runnable
                     isOn_engS3 = true;
                     break;
                 default:
-                    System.out.println("\r[E] unknown error\n");
+                    this.writeln("[E] unknown error\n");
             }
         }
         else if (cmd.equalsIgnoreCase("THRUST")) {
@@ -115,7 +120,7 @@ public class Console implements Runnable
                     ejectPayloadActionPerformed();
                     break;
                 default:
-                    System.out.println("\r[E] unknown error\n");
+                    this.writeln("[E] unknown error\n");
             }
         }
         else if (cmd.equalsIgnoreCase("TIME")) {
@@ -126,18 +131,18 @@ public class Console implements Runnable
         }
         else if (cmd.equalsIgnoreCase("STATUS")) {
             System.out.println();
-            System.out.println("\rFuel:       " + AssetsVars.fuel + " %");
-            System.out.println("\rThrust:     " + AssetsVars.throttle + " %");
+            this.writeln("Fuel:       " + AssetsVars.fuel + " %");
+            this.writeln("Thrust:     " + AssetsVars.throttle + " %");
             System.out.println();
-            System.out.println("\rVelocity:   " + AssetsVars.rktVt + " m/s");
-            System.out.println("\rAltitude:   " + AssetsVars.altitude + " m from nearest body");
+            this.writeln("Velocity:   " + AssetsVars.rktVt + " m/s");
+            this.writeln("Altitude:   " + AssetsVars.altitude + " m from nearest body");
             System.out.println();
-            System.out.println("\rFuel:       " + AssetsVars.Mfuel_t + " kg");
-            System.out.println("\rMass:       " + AssetsVars.Mt + " kg");
+            this.writeln("Fuel:       " + AssetsVars.Mfuel_t + " kg");
+            this.writeln("Mass:       " + AssetsVars.Mt + " kg");
             System.out.println();
-            System.out.println("\rEngine:     " + AssetsVars.engON + " is ON");
-            System.out.println("\rLast stage: " + (int)(AssetsVars.stageDumped + 1));
-            System.out.println("\rTime warp:  " + AssetsVars.warpF + " times");
+            this.writeln("Engine:     " + AssetsVars.engON + " is ON");
+            this.writeln("Last stage: " + (int)(AssetsVars.stageDumped + 1));
+            this.writeln("Time warp:  " + AssetsVars.warpF + " times");
         }
         else if (cmd.equals ("var")) {
             String var = sT.nextToken();
@@ -304,7 +309,7 @@ public class Console implements Runnable
             }
         }
         else if (cmd.equalsIgnoreCase("HELP")) {
-            System.out.println("\rCommands\n" +
+            this.writeln("Commands\n" +
                                 " 1.  select [ENGINE NO]\n" +
                                 " 2.  thrust [% VALUE without % sign]\n" +
                                 " 3.  drop [STAGE NO]\n" +
@@ -313,11 +318,11 @@ public class Console implements Runnable
         }
         else if (cmd.equalsIgnoreCase("EXIT")) {
             running = false;
-            AssetsVars.running = false;
+            running = false;
         }
         else {
-            System.out.println("\r[E] no such command: " + command);
-            System.out.println("\rEnter HELP for commands list and syntax");
+            this.writeln("[E] no such command: " + command);
+            this.writeln("Enter HELP for commands list and syntax");
         }
     }*/
 
@@ -327,50 +332,40 @@ public class Console implements Runnable
     @Override
     public void run()
     {
-        while (running) {
+        while (running && AssetsVars.running) {
             String command = readCommand();
             if (!command.equalsIgnoreCase("")) try {
                 // evaluate(command);
                 if (command.equalsIgnoreCase("exit")) {
-                    System.exit(0);
-                    return;
+                    AssetsVars.running = false;
+                    break;
                 }
             } catch (Exception ex) {
-                System.out.println("\r[E] " + ex);
-                System.out.println("\r    User input error. Please try again");
+                this.writeln("[E] " + ex);
+                this.writeln("    User input error. Please try again");
             }
         }
-        this.stopHelper();
     }
 
-    //Method responsible for starting thread.
+    // Method responsible for starting thread.
     public synchronized void start()
     {
-        if (running)
-            return;
-        running = true;
-        th = new Thread(this);
-        th.start();
+        if (running) return;
+        AssetsVars.running = running = true;
+        thread = new Thread(this);
+        thread.start();
     }
 
-    public synchronized void stopHelper()
-    {
-        if (!running)
-            return;
-        running = false;
-        AssetsVars.quit = true;
-        try {
-            th.join();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        }
-    }
-
-    //Method responsible for stopping thread
+    // Method responsible for stopping thread
     public synchronized void stop()
     {
-        this.stopHelper();
+        if (!running) return;
+        AssetsVars.running = running = false;
+        try {
+            thread.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
     }
 
     //Event actions
@@ -380,44 +375,44 @@ public class Console implements Runnable
                 try {
                     AssetsVars.throttle = thrust;
                 } catch (Exception ex) {
-                    System.out.println("\r[E] INVALID ENTRY FOR THRUST");
+                    this.writeln("[E] INVALID ENTRY FOR THRUST");
                 }
                 if (AssetsVars.throttle < 0) {
-                    System.out.println("\r[E] NO ENGINE FOR ANTI THRUST");
+                    this.writeln("[E] NO ENGINE FOR ANTI THRUST");
                 } else if (AssetsVars.throttle < 10) {
-                    System.out.println("\r> Analyzing thrust...");
-                    System.out.println("\r[W] LOW THRUST");
+                    this.writeln("> Analyzing thrust...");
+                    this.writeln("[W] LOW THRUST");
                 } else if (AssetsVars.throttle >= 101) {
-                    System.out.println("\r> Analyzing thrust...");
-                    System.out.println("\r[E] INVALID COMMAND FOR: ");
-                    System.out.println("\rTHRUST BEYOND 100");
+                    this.writeln("> Analyzing thrust...");
+                    this.writeln("[E] INVALID COMMAND FOR: ");
+                    this.writeln("THRUST BEYOND 100");
                 } else if (AssetsVars.throttle >= 51) {
                     AssetsVars.activity = Activities.LAUNCH;
-                    System.out.println("\r> Analyzing thrust...");
-                    System.out.println("\r[W] THRUST TOO HIGH\n[W] CREW WON'T SURVIVE");
+                    this.writeln("> Analyzing thrust...");
+                    this.writeln("[W] THRUST TOO HIGH\n[W] CREW WON'T SURVIVE");
                 } else {
                     AssetsVars.activity = Activities.LAUNCH;
-                    System.out.println("\r> Analyzing thrust...");
-                    System.out.println("\rTHRUST OPTIMUM");
-                    System.out.println("\rRocket launched thrusting at: " + AssetsVars.throttle);
+                    this.writeln("> Analyzing thrust...");
+                    this.writeln("THRUST OPTIMUM");
+                    this.writeln("Rocket launched thrusting at: " + AssetsVars.throttle);
                 }
             } else {
                 tmp = AssetsVars.throttle;
                 AssetsVars.throttle = thrust;
                 if (AssetsVars.throttle < 0) {
                     AssetsVars.throttle = tmp;
-                    System.out.println("\r[E] INVALID ENTRY FOR THRUST");
+                    this.writeln("[E] INVALID ENTRY FOR THRUST");
                 } else if (AssetsVars.throttle >= 101) {
                     AssetsVars.throttle = tmp;
-                    System.out.println("\r> Analyzing thrust...");
-                    System.out.println("\r[E] INVALID COMMAND FOR: ");
-                    System.out.println("\rTHRUST BEYOND 100");
+                    this.writeln("> Analyzing thrust...");
+                    this.writeln("[E] INVALID COMMAND FOR: ");
+                    this.writeln("THRUST BEYOND 100");
                 } else {
-                    System.out.println("\rSTAGE " + (AssetsVars.stageDumped + 1) + ": Thrust entered: " + AssetsVars.throttle);
+                    this.writeln("STAGE " + (AssetsVars.stageDumped + 1) + ": Thrust entered: " + AssetsVars.throttle);
                 }
             }
         } else {
-            System.out.println("\rStage " + (AssetsVars.stageDumped + 1) + " Engine offline");
+            this.writeln("Stage " + (AssetsVars.stageDumped + 1) + " Engine offline");
         }
     }
 
@@ -425,11 +420,11 @@ public class Console implements Runnable
         if (AssetsVars.stageDumped == 0) {
             AssetsVars.stageDumped = 1;
             isOn_engS1 = false;
-            System.out.println("\rDumped stage 1");
+            this.writeln("Dumped stage 1");
             AssetsVars.throttle = 0;
             AssetsVars.yFlame -= 128;
         } else {
-            System.out.println("\r[E] STAGE DOESN'T EXIST");
+            this.writeln("[E] STAGE DOESN'T EXIST");
         }
     }
 
@@ -437,7 +432,7 @@ public class Console implements Runnable
         if (AssetsVars.stageDumped == 0 || AssetsVars.stageDumped == 1) {
             isOn_engS1 = false;
             isOn_engS2 = false;
-            System.out.println("\rDumped stage 2");
+            this.writeln("Dumped stage 2");
             AssetsVars.throttle = 0;
             AssetsVars.yFlame -= 128;
             if (AssetsVars.stageDumped == 0) {
@@ -445,7 +440,7 @@ public class Console implements Runnable
             }
             AssetsVars.stageDumped = 2;
         } else {
-            System.out.println("\r[E] STAGE DOESN'T EXIST");
+            this.writeln("[E] STAGE DOESN'T EXIST");
         }
     }
 
@@ -455,8 +450,8 @@ public class Console implements Runnable
                 isOn_engS1 = false;
                 isOn_engS2 = false;
                 isOn_engS3 = false;
-                System.out.println("\rDumped stage 3");
-                System.out.println("\rEjecting Module....");
+                this.writeln("Dumped stage 3");
+                this.writeln("Ejecting Module....");
                 AssetsVars.throttle = 0;
                 AssetsVars.activity = Activities.RELEASE_PAYLOAD;
                 if (AssetsVars.stageDumped == 0) {
@@ -472,10 +467,10 @@ public class Console implements Runnable
                 }
                 AssetsVars.stageDumped = 3;
             } else {
-                System.out.println("\r[E] COMMAND INVALID");
+                this.writeln("[E] COMMAND INVALID");
             }
         } else {
-            System.out.println("\r[E] CAN'T REMOVE FAIRINGS");
+            this.writeln("[E] CAN'T REMOVE FAIRINGS");
         }
     }*/
 

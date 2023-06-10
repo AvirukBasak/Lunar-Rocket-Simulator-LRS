@@ -29,24 +29,26 @@ final class GUI extends JFrame
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");     // Windows UI
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex2) {}
         }
-        createUI();
     }
 
     // Creates the UI with window and components
-    public void createUI()
+    public GUI create()
     {
         // UI object definations.
         cnvsSpace = new Canvas();
 
+        // App icon
+        final BufferedImage appIcon = new SpriteSheet(ImageLoader.loadImage("res/AppIcon.png")).Crop(0, 0, 48, 48);
+
         // JFrame frame properties.
-        setTitle("Lunar Rocket Sim LRS");
-        BufferedImage AppIcon = new SpriteSheet(ImageLoader.loadImage("res/AppIcon.png")).Crop(0, 0, 48, 48);
-        setIconImage(AppIcon);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(width,height);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setLayout(null);
+        this.setTitle("Lunar Rocket Sim LRS");
+        this.setIconImage(appIcon);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(width,height);
+        this.setResizable(false);
+        this.setAlwaysOnTop(true);
+        this.setLocationRelativeTo(null);
+        this.setLayout(null);
 
         // Canvas cnvsSpace properties.
         cnvsSpace.setBounds(0, 0, width, height);
@@ -54,8 +56,14 @@ final class GUI extends JFrame
         cnvsSpace.setBackground(Color.black);
 
         // JFrame frame adding components.
-        add(cnvsSpace);
-        setVisible(true);
+        this.add(cnvsSpace);
+        this.setVisible(true);
+        return this;
+    }
+
+    public void close() {
+        this.dispose();
+        System.exit(0);
     }
 
     // Getter for Canvas cnvsSpace.

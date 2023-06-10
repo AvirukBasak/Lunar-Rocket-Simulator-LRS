@@ -32,11 +32,11 @@ public class Environment
      * @param double x coordinate of env bg
      * @param double y coordinate of env bg
      */
-    public Environment(Canvas canvas, BufferedImage bg, double x, double y)
+    public Environment(Canvas canvas, BufferedImage bg)
     {
         this.bg = bg;
-        this.x = x;
-        this.y = y;
+        this.x = 0;
+        this.y = 0;
         this.hasGround = false;
         this.pov = Pov.FOCUSSED_POV;
         this.dxEntity = 0;
@@ -59,29 +59,42 @@ public class Environment
      * @param BufferedImage The background image
      * @param double x coordinate of env bg
      * @param double y coordinate of env bg
+     */
+    public Environment(Canvas canvas, BufferedImage bg, double x, double y)
+    {
+        this(canvas, bg);
+        this.x = x;
+        this.y = y;
+    }
+    /**
+     * A env is a collection of many entites.
+     * @param Canvas The canvas where the env is drawn
+     * @param BufferedImage The background image
+     * @param double default x acceleration of that system due to some potential gradient, pixel/frame2
+     * @param double default y acceleration of that system due to some potential gradient, pixel/frame2
+     */
+    public Environment(Canvas canvas, BufferedImage bg, double ddx, double ddy, boolean hasGround)
+    {
+        this(canvas, bg);
+        this.hasGround = hasGround;
+        this.ddxEntity = ddx;
+        this.ddyEntity = ddy;
+    }
+    /**
+     * A env is a collection of many entites.
+     * @param Canvas The canvas where the env is drawn
+     * @param BufferedImage The background image
+     * @param double x coordinate of env bg
+     * @param double y coordinate of env bg
      * @param double default x acceleration of that system due to some potential gradient, pixel/frame2
      * @param double default y acceleration of that system due to some potential gradient, pixel/frame2
      */
     public Environment(Canvas canvas, BufferedImage bg, double x, double y, double ddx, double ddy, boolean hasGround)
     {
-        this.bg = bg;
-        this.x = x;
-        this.y = y;
+        this(canvas, bg, x, y);
         this.hasGround = hasGround;
-        this.pov = Pov.FOCUSSED_POV;
-        this.dxEntity = 0;
-        this.dyEntity = 0;
         this.ddxEntity = ddx;
         this.ddyEntity = ddy;
-        this.width = canvas.getWidth();
-        this.height = canvas.getHeight();
-        this.bs = canvas.getBufferStrategy();
-        if (this.bs == null) {
-            canvas.createBufferStrategy(3);
-            this.bs = canvas.getBufferStrategy();
-        }
-        this.focussedEntity = null;
-        this.entities = null;
     }
     /**
      * Add an entity to the env.
@@ -206,5 +219,23 @@ public class Environment
             for (Entity e : this.entities)
                 e.flush();
         this.entities = null;
+    }
+
+    public int getWidth()
+    {
+        return this.bg.getWidth();
+    }
+    public int getHeight()
+    {
+        return this.bg.getHeight();
+    }
+
+    public int getX()
+    {
+        return (int) this.x;
+    }
+    public int getY()
+    {
+        return (int) this.y;
     }
 }

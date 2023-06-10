@@ -23,15 +23,13 @@ public class Entity
     /**
      * An entity is an existence, visualised by its image attribute.
      * @param BufferedImage The attribute image
-     * @param double x coordinate entity
-     * @param double y coordinate entity
      */
-    public Entity(double x, double y, BufferedImage img)
+    public Entity(BufferedImage img)
     {
         this.isSoft = false;
         this.hidden = false;
-        this.x = x;
-        this.y = y;
+        this.x = 0;
+        this.y = 0;
         if (img != null) this.entityImg = img;
         else throw new NullPointerException("Entity: image is null");
         this.xBound = img.getWidth();
@@ -39,6 +37,18 @@ public class Entity
         this.attachments = null;
         this.parent = null;
         this.env = null;
+    }
+    /**
+     * An entity is an existence, visualised by its image attribute.
+     * @param BufferedImage The attribute image
+     * @param double x coordinate entity
+     * @param double y coordinate entity
+     */
+    public Entity(double x, double y, BufferedImage img)
+    {
+        this(img);
+        this.x = x;
+        this.y = y;
     }
     public void hide() { this.hidden = true; }
     public void show() { this.hidden = false; }

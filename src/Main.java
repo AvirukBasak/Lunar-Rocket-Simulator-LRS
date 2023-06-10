@@ -12,8 +12,9 @@ class Main
          * This will aid in reducing code execution wait time
          * and also aids in programming logic.
          */
-        if (args.length >= 1)
-            Sim.noGUI = args[0].equalsIgnoreCase("-noGUI");
-        new Sim("Lunar Space Simulator LRS", 768, 582).start();
+        /* if (args.length >= 1)
+            Sim.noGUI = args[0].equalsIgnoreCase("-noGUI"); */
+        Sim sim = new Sim("Lunar Space Simulator LRS", 768, 582);
+        sim.start();
     }
 }

@@ -5,17 +5,20 @@ import java.awt.image.BufferStrategy;
 
 public class Sim implements Runnable
 {
+    // static flags
+    public static boolean noGUI = false;
+
     // Global variable declaration.
     private final String title;
     private final int width, height;
-    public static boolean noGUI = false;
     private boolean running = false;
 
     // Global object declarations.
     private GUI ui;
     private Canvas cv;
-    private Thread th;
+    private Thread thread;
     private Environment env;
+    private Console console;
 
     // belowKarman vars
 
@@ -31,9 +34,19 @@ public class Sim implements Runnable
 
     public Sim(String title, int width, int height)
     {
+        ui = null;
+        cv = null;
+        env = null;
+        console = new Console();
+        console.writeln("Systems online");
         this.title = title;
         this.width = width;
         this.height = height;
+        ui = new GUI(title, width, height);
+        if (Sim.noGUI) return;
+        cv = ui.create().getCanvas();
+        Entities.initiate();
+        Environments.initiate();
     }
 
     // Method responsible for updating values.
@@ -41,33 +54,33 @@ public class Sim implements Runnable
     {
         switch (AssetsVars.activity) {
             case BELOW_KARMAN: {
-                Entity rktFlameS1, rktFlameS2, rktFlameS3;
-                rktFlameS1 = rktFlameS2 = rktFlameS3 = null;
-                if (env == null) {
-                    env = Environments.skyGrad(this.cv, 0, this.height - AssetsImg.skyGrad.getHeight() +10);
-                    final int onPadY = this.height -AssetsImg.lPad.getHeight();
-                    Entity lPad = Entities.lPad(0, onPadY);
-                    Entity tower = Entities.tower(this.width/2 -AssetsImg.tower.getWidth()*2 + 32,onPadY -AssetsImg.tower.getHeight());
-                    lPad.attatch(tower);
-                    final int onS1Y = onPadY - AssetsImg.rktS1.getHeight();
-                    final int onS2Y = onS1Y - AssetsImg.rktS2.getHeight();
-                    final int onS3Y = onS2Y - AssetsImg.rktS3.getHeight();
-                    final int rktPosnX = this.width/2 - 16;
-                    Entity rktS1 = Entities.rktS1(rktPosnX, onS1Y);
-                    Entity rktS2 = Entities.rktS2(rktPosnX, onS2Y);
-                    Entity rktS3 = Entities.rktS3(rktPosnX, onS3Y);
-                    Entity rktCone = Entities.rktCone(rktPosnX, onS3Y -AssetsImg.rktCone.getHeight());
-                    rktCone.attatch(rktS3);
-                    rktS3.attatch(rktFlameS3 = Entities.rktFlame(this.width/2, onS3Y +AssetsImg.rktS3.getHeight()));
-                    rktS3.attatch(rktS2);
-                    rktS2.attatch(rktFlameS2 = Entities.rktFlame(this.width/2, onS2Y +AssetsImg.rktS2.getHeight()));
-                    rktS2.attatch(rktS1);
-                    rktS1.attatch(rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y +AssetsImg.rktS1.getHeight()));
-                    env.addEntity(rktCone);
-                    // lPad.flush();
-                    env.focusOn(rktCone);
-                    rktFlameS1.hide();
-                }
+                if (env != null) break;
+                env = Environments.skyGrad(cv, 0, height - Environments.skyGrad(cv).getHeight() +10);
+                final int onPadY = height - Entities.lPad().getHeight();
+                Entity lPad = Entities.lPad(0, onPadY);
+                Entity tower = Entities.tower(width /2 - Entities.tower().getWidth() *2 +32, onPadY - Entities.tower().getHeight());
+                lPad.attatch(tower);
+                final int onS1Y = onPadY - Entities.rktS1().getHeight();
+                final int onS2Y = onS1Y - Entities.rktS2().getHeight();
+                final int onS3Y = onS2Y - Entities.rktS3().getHeight();
+                final int rktPosnX = width /2 - 16;
+                Entity rktS1 = Entities.rktS1(rktPosnX, onS1Y);
+                Entity rktS2 = Entities.rktS2(rktPosnX, onS2Y);
+                Entity rktS3 = Entities.rktS3(rktPosnX, onS3Y);
+                Entity rktCone = Entities.rktCone(rktPosnX, onS3Y - Entities.rktCone().getHeight());
+                Entity rktFlameS3 = Entities.rktFlame(width /2, onS3Y + Entities.rktS3().getHeight());
+                Entity rktFlameS2 = Entities.rktFlame(width /2, onS2Y + Entities.rktS2().getHeight());
+                Entity rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y + Entities.rktS1().getHeight());
+                rktCone.attatch(rktS3);
+                rktS3.attatch(rktFlameS3);
+                rktS3.attatch(rktS2);
+                rktS2.attatch(rktFlameS2);
+                rktS2.attatch(rktS1);
+                rktS1.attatch(rktFlameS1);
+                env.addEntity(rktCone);
+                // lPad.flush();
+                env.focusOn(rktCone);
+                rktFlameS1.hide();
                 break;
             }
             default: System.err.println("unimplemented");
@@ -83,34 +96,19 @@ public class Sim implements Runnable
         }
     }
 
-    private void initiate()
-    {
-        ui = null;
-        env = null;
-        if (!this.noGUI) {
-            ui = new GUI(title, width, height);
-            cv = ui.getCanvas();
-            Entities.initiate();
-            Environments.initiate();
-        }
-        Console.write("\rSystems online...");
-        new Console().start();
-    }
-
     /**
      * Abstract method: Runs the code required to be run on thread
      */
     @Override
     public void run()
     {
-        initiate();
-        double deltaUpdate = 0, deltaFrames = 0;
-        long now;
+        double deltaUpdate = 0,
+               deltaFrames = 0;
         long lastTime = System.nanoTime();
         double timePerFrame = 1000000000 / AssetsVars.FPS;
         double timePerUpdate = 1000000000 / (AssetsVars.UPS * (AssetsVars.warpF > 0 ? AssetsVars.warpF : 1));
-        while (running) {
-            now = System.nanoTime();
+        while (running && AssetsVars.running) {
+            long now = System.nanoTime();
             deltaUpdate += (now - lastTime) / timePerUpdate;
             deltaFrames += (now - lastTime) / timePerFrame;
             lastTime = now;
@@ -126,39 +124,32 @@ public class Sim implements Runnable
                 render();
                 deltaFrames--;
             }
-            if (AssetsVars.quit) running = false;
         }
-        // Calls new this.stop() to close thread.
-        this.stopHelper();
+        console.stop();
+        this.stop();
     }
 
-    //Method responsible for starting thread.
+    // Method responsible for starting thread.
     public synchronized void start()
     {
-        if (running)
-            return;
-        running = true;
-        th = new Thread(this);
-        th.start();
+        if (running) return;
+        AssetsVars.running = running = true;
+        thread = new Thread(this);
+        console.start();
+        thread.start();
     }
 
-    public synchronized void stopHelper()
-    {
-        if (!running)
-            return;
-        running = false;
-        AssetsVars.quit = true;
-        try {
-            th.join();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        }
-    }
-
-    //Method responsible for stopping thread
+    // Method responsible for stopping thread
     public synchronized void stop()
     {
-        this.stopHelper();
+        if (!running) return;
+        AssetsVars.running = running = false;
+        console.stop();
+        ui.close();
+        try {
+            thread.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
     }
 }
