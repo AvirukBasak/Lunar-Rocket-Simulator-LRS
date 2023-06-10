@@ -55,7 +55,7 @@ public class Sim implements Runnable
         if (Sim.noGUI) return;
         cv = ui.create().getCanvas();
         Entities.initiate();
-        Environments.initiate();
+        Environments.initiate(cv);
     }
 
     // Method responsible for updating values.
@@ -64,7 +64,7 @@ public class Sim implements Runnable
         switch (StateVars.activity) {
             case BELOW_KARMAN: {
                 if (env != null) break;
-                env = Environments.skyGrad(cv, 0, height - Environments.skyGrad(cv).getHeight() +10);
+                env = Environments.skyGrad(0, height - Environments.skyGrad().getHeight() +10);
                 final int onPadY = height - Entities.lPad().getHeight();
                 Entity lPad = Entities.lPad(0, onPadY);
                 Entity tower = Entities.tower(width /2 - Entities.tower().getWidth() *2 +32, onPadY - Entities.tower().getHeight());

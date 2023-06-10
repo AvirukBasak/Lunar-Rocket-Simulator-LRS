@@ -8,30 +8,32 @@ import assets.StateVars;
 public class Environments
 {
     private static boolean init = false;
+    private static Canvas cv;
     private static Environment m_stars;           // Stars
     private static Environment m_skyGrad;         // Sky
     private static Environment m_success;
     private static Environment m_failure;
 
-    public static void initiate()
+    public static void initiate(Canvas cv)
     {
         if (init) return;
         else init = true;
         Sprites.initiate();
+        Environments.cv = cv;
         m_stars = null;
         m_skyGrad = null;
         m_success = null;
         m_failure = null;
     }
 
-    public static Environment stars(Canvas cv)
+    public static Environment stars()
     {
         if (m_stars == null)
             return m_stars = new Environment(cv, Sprites.stars);
         return m_stars;
     }
 
-    public static Environment skyGrad(Canvas cv)
+    public static Environment skyGrad()
     {
         if (m_skyGrad == null)
             return m_skyGrad = new Environment(cv, Sprites.skyGrad, 0,
@@ -39,21 +41,21 @@ public class Environments
         return m_skyGrad;
     }
 
-    public static Environment success(Canvas cv)
+    public static Environment success()
     {
         if (m_success == null)
             return m_success = new Environment(cv, Sprites.success);
         return m_success;
     }
 
-    public static Environment failure(Canvas cv)
+    public static Environment failure()
     {
         if (m_failure == null)
             return m_failure = new Environment(cv, Sprites.failure);
         return m_failure;
     }
 
-    public static Environment stars(Canvas cv, double x, double y)
+    public static Environment stars(double x, double y)
     {
         if (m_stars == null)
             return m_stars = new Environment(cv, Sprites.stars, x, y);
@@ -61,7 +63,7 @@ public class Environments
         return m_stars;
     }
 
-    public static Environment skyGrad(Canvas cv, double x, double y)
+    public static Environment skyGrad(double x, double y)
     {
         if (m_skyGrad == null)
             return m_skyGrad = new Environment(cv, Sprites.skyGrad, x, y, 0,
@@ -70,7 +72,7 @@ public class Environments
         return m_skyGrad;
     }
 
-    public static Environment success(Canvas cv, double x, double y)
+    public static Environment success(double x, double y)
     {
         if (m_success == null)
             return m_success = new Environment(cv, Sprites.success, x, y);
@@ -78,7 +80,7 @@ public class Environments
         return m_success;
     }
 
-    public static Environment failure(Canvas cv, double x, double y)
+    public static Environment failure(double x, double y)
     {
         if (m_failure == null)
             return m_failure = new Environment(cv, Sprites.failure, x, y);
