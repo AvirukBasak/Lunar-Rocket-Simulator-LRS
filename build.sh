@@ -37,7 +37,7 @@ clean() {
 
 cleaner() {
     clean
-    rm "$JAR_NAME" 2> /dev/null
+    rm -f "$JAR_NAME" 2> /dev/null
 }
 
 mkdir -p "$BUILD"
