@@ -27,7 +27,7 @@ public class Environment
     private double x, y, dxEntity, dyEntity, ddxEntity, ddyEntity;
     private Pov pov;
     private Entity focussedEntity;
-    protected List<Entity> entities;
+    public List<Entity> entities;
 
     /**
      * A env is a collection of many entites.

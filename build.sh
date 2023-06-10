@@ -2,6 +2,7 @@
 
 PROJECT_ROOT="."
 
+RES="$PROJECT_ROOT/res"
 SRC="$PROJECT_ROOT/src"
 BUILD="$PROJECT_ROOT/build"
 MANIFEST="$PROJECT_ROOT/META-INF/MANIFEST.MF"
@@ -15,23 +16,24 @@ if [ "$1" = "run" ] && ( stat "$JAR_NAME" > /dev/null 2> /dev/null ); then
     java -jar "$JAR_NAME"
     exit 0
 elif [ "$1" = "clean" ]; then
-    rm -rf "$BUILD/"*.class  2> /dev/null
     rm -rf "$BUILD/res"      2> /dev/null
+    rm -rf "$BUILD/"*        2> /dev/null
     exit 0
 elif [ "$1" = "cleaner" ]; then
-    rm -rf "$BUILD/"*.class  2> /dev/null
     rm -rf "$BUILD/res"      2> /dev/null
+    rm -rf "$BUILD/"*        2> /dev/null
     rm "$JAR_NAME"           2> /dev/null
     exit 0
 elif [ "$1" = "" ]; then
-    echo "running javac on $SRC"
-    javac -Xlint:deprecation -sourcepath "$SRC" -d "$BUILD" -h "$BUILD" $(find "$SRC/" -name "*.java")
+    echo "compile sources from $SRC"
+    find src -name "*.java" > sources.list
+    javac -Xlint:deprecation -d build @sources.list
+    rm -f sources.list
     exitcode=$?
-    cp -r "$SRC/res" "$BUILD/"
-    echo "entered dir $BUILD"
-    cd "$BUILD"
     if (( exitcode == 0 )); then
-        echo "running jar..."
+        cp -r "$RES" "$BUILD/"
+        cd "$BUILD"
+        echo "jar archive $BUILD"
         jar -cvmf "../$MANIFEST" "../$JAR_NAME" $(find ./)
     fi
     echo "done"

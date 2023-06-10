@@ -16,7 +16,7 @@ public class Entity
     private Entity parent;
     private boolean hidden;
 
-    protected Environment env;
+    public Environment env;
 
     /**
      * A soft entity cannot interact with any other entity.
