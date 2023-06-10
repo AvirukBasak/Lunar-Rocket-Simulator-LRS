@@ -1,43 +1,58 @@
 #!/bin/bash
 
-PROJECT_ROOT="."
+ROOT="."
 
-RES="$PROJECT_ROOT/res"
-SRC="$PROJECT_ROOT/src"
-BUILD="$PROJECT_ROOT/build"
-MANIFEST="$PROJECT_ROOT/META-INF/MANIFEST.MF"
+RES="$ROOT/res"
+SRC="$ROOT/src"
+BUILD="$ROOT/build"
+MANIFEST="$ROOT/META-INF/MANIFEST.MF"
+JAR_NAME="$ROOT/Lunar-Rocket-Simulator-LRS.jar"
 
-ENTRY_PT="Main"
-JAR_NAME="Lunar-Rocket-Simulator-LRS.jar"
-
-mkdir -p "$BUILD"
-
-if [ "$1" = "run" ] && ( stat "$JAR_NAME" > /dev/null 2> /dev/null ); then
-    java -jar "$JAR_NAME"
-    exit 0
-elif [ "$1" = "clean" ]; then
-    rm -rf "$BUILD/res"      2> /dev/null
-    rm -rf "$BUILD/"*        2> /dev/null
-    exit 0
-elif [ "$1" = "cleaner" ]; then
-    rm -rf "$BUILD/res"      2> /dev/null
-    rm -rf "$BUILD/"*        2> /dev/null
-    rm "$JAR_NAME"           2> /dev/null
-    exit 0
-elif [ "$1" = "" ]; then
+build() {
     echo "compile sources from $SRC"
-    find src -name "*.java" > sources.list
+    find "$SRC" -name "*.java" > sources.list
     javac -Xlint:deprecation -d build @sources.list
     exitcode=$?
     rm -f sources.list
     if (( exitcode == 0 )); then
         cp -r "$RES" "$BUILD/"
-        cd "$BUILD"
         echo "jar archive $BUILD"
-        jar -cvmf "../$MANIFEST" "../$JAR_NAME" $(find ./)
+        jar -cmf "$MANIFEST" "$JAR_NAME" -C build .
+        echo "done"
     fi
-    echo "done"
-else
-    echo "build.sh: invalid argument"
-    exit 1
-fi
+}
+
+run() {
+    if ! ( stat "$JAR_NAME" > /dev/null 2> /dev/null ); then
+        build && java -jar "$JAR_NAME"
+    else
+        java -jar "$JAR_NAME"
+    fi
+}
+
+clean() {
+    rm -rf "$BUILD/res" 2> /dev/null
+    rm -rf "$BUILD/"* 2> /dev/null
+}
+
+cleaner() {
+    clean
+    rm "$JAR_NAME" 2> /dev/null
+}
+
+mkdir -p "$BUILD"
+
+case "$1" in
+    "run") run
+        ;;
+    "clean") clean
+        ;;
+    "cleaner") cleaner
+        ;;
+    "") build
+        ;;
+    *)
+        echo "build.sh: invalid argument"
+        exit 1
+        ;;
+esac
