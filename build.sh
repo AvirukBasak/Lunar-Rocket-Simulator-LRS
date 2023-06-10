@@ -24,7 +24,7 @@ elif [ "$1" = "cleaner" ]; then
     rm "$JAR_NAME"           2> /dev/null
     exit 0
 elif [ "$1" = "" ]; then
-    echo "running javac on $SRC/*.java"
+    echo "running javac on $SRC"
     javac -Xlint:deprecation -sourcepath "$SRC" -d "$BUILD" -h "$BUILD" $(find "$SRC/" -name "*.java")
     exitcode=$?
     cp -r "$SRC/res" "$BUILD/"

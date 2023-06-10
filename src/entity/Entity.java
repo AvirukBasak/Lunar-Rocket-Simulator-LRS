@@ -1,7 +1,11 @@
+package entity;
+
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
+
+import env.Environment;
 
 public class Entity
 {

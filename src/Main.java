@@ -1,8 +1,10 @@
+import game.Sim;
+
 /**
  * @name Lunar Rocket Simulator LRS
  * @version 2021.5.25
  */
-class Main
+public class Main
 {
     //main method that begins software execution.
     public static void main (String[] args)

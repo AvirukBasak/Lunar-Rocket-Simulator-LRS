@@ -1,6 +1,11 @@
+package assets;
+
 import java.awt.image.BufferedImage;
 
-public class AssetsImg
+import util.ImageLoader;
+import util.SpriteSheet;
+
+public class Sprites
 {
     private static boolean init = false;
     /* Global BufferedImage object declarations,
@@ -60,37 +65,37 @@ public class AssetsImg
         rockets1x7 = new SpriteSheet(ImageLoader.loadImage("res/rockets1x7.png"));
 
         // Assign images to BufferedImage objects.
-        rktCone = rockets1x7.Crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 1*HEIGHT);
-        rktS3 = rockets1x7.Crop(0*WIDTH, 1*HEIGHT, 1*WIDTH, 2*HEIGHT);
-        rktS2 = rockets1x7.Crop(0*WIDTH, 3*HEIGHT, 1*WIDTH, 2*HEIGHT);
-        rktS1 = rockets1x7.Crop(0*WIDTH, 5*HEIGHT, 1*WIDTH, 2*HEIGHT);
-        rktBurn = rockets1x7.Crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 2*HEIGHT);
-        rktFlame = new SpriteSheet(ImageLoader.loadImage("res/flame.png")).Crop(0 * WIDTH, 0 * HEIGHT, 32, 95);
+        rktCone = rockets1x7.crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 1*HEIGHT);
+        rktS3 = rockets1x7.crop(0*WIDTH, 1*HEIGHT, 1*WIDTH, 2*HEIGHT);
+        rktS2 = rockets1x7.crop(0*WIDTH, 3*HEIGHT, 1*WIDTH, 2*HEIGHT);
+        rktS1 = rockets1x7.crop(0*WIDTH, 5*HEIGHT, 1*WIDTH, 2*HEIGHT);
+        rktBurn = rockets1x7.crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 2*HEIGHT);
+        rktFlame = new SpriteSheet(ImageLoader.loadImage("res/flame.png")).crop(0 * WIDTH, 0 * HEIGHT, 32, 95);
 
-        tower = launchtower1x7.Crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 7*HEIGHT);
+        tower = launchtower1x7.crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 7*HEIGHT);
 
-        lPad = launchPad12x2.Crop(0*WIDTH, 0*HEIGHT, 12*WIDTH, 2*HEIGHT);
+        lPad = launchPad12x2.crop(0*WIDTH, 0*HEIGHT, 12*WIDTH, 2*HEIGHT);
 
-        rktDef = points.Crop(0, 0, 4, 4);
-        earth = points.Crop(5, 0, 16, 16);
-        moon = points.Crop(22, 0, 114, 114);
+        rktDef = points.crop(0, 0, 4, 4);
+        earth = points.crop(5, 0, 16, 16);
+        moon = points.crop(22, 0, 114, 114);
 
         stars = ImageLoader.loadImage("res/stars.png");
         skyGrad = ImageLoader.loadImage("res/skyGrad.png");
 
-        rkt = payloadRsl0x0.Crop(0*WIDTH, 0*HEIGHT, 7*WIDTH, 5*HEIGHT);
-        rktCovUp = payloadRsl0x0.Crop(7*WIDTH, 0*HEIGHT, 7*WIDTH, 2*HEIGHT);
-        rktCovDown = payloadRsl0x0.Crop(7*WIDTH, 3*HEIGHT, 7*WIDTH, 2*HEIGHT);
+        rkt = payloadRsl0x0.crop(0*WIDTH, 0*HEIGHT, 7*WIDTH, 5*HEIGHT);
+        rktCovUp = payloadRsl0x0.crop(7*WIDTH, 0*HEIGHT, 7*WIDTH, 2*HEIGHT);
+        rktCovDown = payloadRsl0x0.crop(7*WIDTH, 3*HEIGHT, 7*WIDTH, 2*HEIGHT);
 
-        payLoad = releases4x3.Crop(0*WIDTH, 0*HEIGHT, 7*WIDTH, 3*HEIGHT);
-        landerBrkOff = releases4x3.Crop(1*WIDTH, 3*HEIGHT, 4*WIDTH, 3*HEIGHT);
-        moduleRsld = releases4x3.Crop(1*WIDTH, 6*HEIGHT, 4*WIDTH, 3*HEIGHT);
+        payLoad = releases4x3.crop(0*WIDTH, 0*HEIGHT, 7*WIDTH, 3*HEIGHT);
+        landerBrkOff = releases4x3.crop(1*WIDTH, 3*HEIGHT, 4*WIDTH, 3*HEIGHT);
+        moduleRsld = releases4x3.crop(1*WIDTH, 6*HEIGHT, 4*WIDTH, 3*HEIGHT);
 
-        /*landerRsldF = lander0x0.Crop(1*WIDTH, 7*HEIGHT, 2*WIDTH, 2*HEIGHT);
-        landerRsldB = lander0x0.Crop(1*WIDTH, 1*HEIGHT, 2*WIDTH, 2*HEIGHT);
-        lander64F = lander0x0.Crop(0*WIDTH, 5*HEIGHT, 1*WIDTH, 1*HEIGHT);
-        lander64B = lander0x0.Crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 1*HEIGHT);
-        lander128F = lander0x0.Crop(1*WIDTH, 3*HEIGHT, 2*WIDTH, 2*HEIGHT);
-        lander128B = lander0x0.Crop(1*WIDTH, 5*HEIGHT, 2*WIDTH, 2*HEIGHT);*/
+        /*landerRsldF = lander0x0.crop(1*WIDTH, 7*HEIGHT, 2*WIDTH, 2*HEIGHT);
+        landerRsldB = lander0x0.crop(1*WIDTH, 1*HEIGHT, 2*WIDTH, 2*HEIGHT);
+        lander64F = lander0x0.crop(0*WIDTH, 5*HEIGHT, 1*WIDTH, 1*HEIGHT);
+        lander64B = lander0x0.crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 1*HEIGHT);
+        lander128F = lander0x0.crop(1*WIDTH, 3*HEIGHT, 2*WIDTH, 2*HEIGHT);
+        lander128B = lander0x0.crop(1*WIDTH, 5*HEIGHT, 2*WIDTH, 2*HEIGHT);*/
     }
 }

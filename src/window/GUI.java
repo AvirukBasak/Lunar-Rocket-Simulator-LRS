@@ -1,3 +1,5 @@
+package window;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,7 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-final class GUI extends JFrame
+import util.ImageLoader;
+import util.SpriteSheet;
+
+final public class GUI extends JFrame
 {
     // Variable declarations.
     private final String title;
@@ -38,7 +43,7 @@ final class GUI extends JFrame
         cnvsSpace = new Canvas();
 
         // App icon
-        final BufferedImage appIcon = new SpriteSheet(ImageLoader.loadImage("res/AppIcon.png")).Crop(0, 0, 48, 48);
+        final BufferedImage appIcon = new SpriteSheet(ImageLoader.loadImage("res/AppIcon.png")).crop(0, 0, 48, 48);
 
         // JFrame frame properties.
         this.setTitle("Lunar Rocket Sim LRS");

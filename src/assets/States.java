@@ -1,4 +1,6 @@
-public enum Activities
+package assets;
+
+public enum States
 {
     BELOW_KARMAN,
     LAUNCH,

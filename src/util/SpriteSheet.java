@@ -1,3 +1,5 @@
+package util;
+
 import java.awt.image.BufferedImage;
 
 public class SpriteSheet
@@ -10,7 +12,7 @@ public class SpriteSheet
         this.bfSheet = bfSheet;
     }
 
-    public BufferedImage Crop(int x, int y, int width, int height)
+    public BufferedImage crop(int x, int y, int width, int height)
     {
         /*Method is used to crop and pass real image from
          *file to a BufferedImage object.

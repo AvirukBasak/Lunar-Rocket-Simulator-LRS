@@ -1,3 +1,5 @@
+package env;
+
 import java.awt.image.BufferedImage;
 import java.awt.Canvas;
 import java.awt.Graphics;
@@ -5,6 +7,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.util.List;
 import java.util.ArrayList;
+
+import entity.Entity;
 
 public class Environment
 {

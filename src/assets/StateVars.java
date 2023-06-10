@@ -1,10 +1,12 @@
-public class AssetsVars
+package assets;
+
+public class StateVars
 {
     // running flag
     public static boolean running = false;
 
     // boolean markers
-    public static Activities activity = Activities.BELOW_KARMAN;
+    public static States activity = States.BELOW_KARMAN;
 
     // frames, updates and observation clock
     public static final int FPS = 60;

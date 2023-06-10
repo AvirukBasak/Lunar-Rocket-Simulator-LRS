@@ -1,7 +1,16 @@
+package game;
+
 import java.awt.Color;
 import java.awt.Canvas;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
+
+import assets.StateVars;
+import entity.Entity;
+import entity.Entities;
+import env.Environment;
+import env.Environments;
+import window.GUI;
 
 public class Sim implements Runnable
 {
@@ -52,7 +61,7 @@ public class Sim implements Runnable
     // Method responsible for updating values.
     private void update()
     {
-        switch (AssetsVars.activity) {
+        switch (StateVars.activity) {
             case BELOW_KARMAN: {
                 if (env != null) break;
                 env = Environments.skyGrad(cv, 0, height - Environments.skyGrad(cv).getHeight() +10);
@@ -105,15 +114,15 @@ public class Sim implements Runnable
         double deltaUpdate = 0,
                deltaFrames = 0;
         long lastTime = System.nanoTime();
-        double timePerFrame = 1000000000 / AssetsVars.FPS;
-        double timePerUpdate = 1000000000 / (AssetsVars.UPS * (AssetsVars.warpF > 0 ? AssetsVars.warpF : 1));
-        while (running && AssetsVars.running) {
+        double timePerFrame = 1000000000 / StateVars.FPS;
+        double timePerUpdate = 1000000000 / (StateVars.UPS * (StateVars.warpF > 0 ? StateVars.warpF : 1));
+        while (running && StateVars.running) {
             long now = System.nanoTime();
             deltaUpdate += (now - lastTime) / timePerUpdate;
             deltaFrames += (now - lastTime) / timePerFrame;
             lastTime = now;
             // Value updater
-            if (deltaUpdate >= 1 && AssetsVars.warpF > 0) {
+            if (deltaUpdate >= 1 && StateVars.warpF > 0) {
                 // Calls update() to update values.
                 update();
                 deltaUpdate--;
@@ -133,7 +142,7 @@ public class Sim implements Runnable
     public synchronized void start()
     {
         if (running) return;
-        AssetsVars.running = running = true;
+        StateVars.running = running = true;
         thread = new Thread(this);
         console.start();
         thread.start();
@@ -143,7 +152,7 @@ public class Sim implements Runnable
     public synchronized void stop()
     {
         if (!running) return;
-        AssetsVars.running = running = false;
+        StateVars.running = running = false;
         console.stop();
         ui.close();
         try {
