@@ -8,5 +8,5 @@ $ ./build.sh
 ```
 Execute
 ```
-$ java -jar Lunar-Rocket-Simulator-LRS.jar
+$ build.sh run
 ```
