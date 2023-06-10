@@ -16,7 +16,7 @@ public class Main
          */
         /* if (args.length >= 1)
             Sim.noGUI = args[0].equalsIgnoreCase("-noGUI"); */
-        Sim sim = new Sim("Lunar Space Simulator LRS", 768, 582);
+        Sim sim = new Sim("Lunar Space Simulator LRS", 768, 592);
         sim.start();
     }
 }

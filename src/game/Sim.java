@@ -64,21 +64,21 @@ public class Sim implements Runnable
         switch (StateVars.activity) {
             case BELOW_KARMAN: {
                 if (env != null) break;
-                env = Environments.skyGrad(0, height - Environments.skyGrad().getHeight() );
+                env = Environments.skyGrad(0, height - Environments.skyGrad().getHeight());
                 final int onPadY = height - Entities.lPad().getHeight();
                 Entity lPad = Entities.lPad(0, onPadY);
                 Entity tower = Entities.tower(width /2 - Entities.tower().getWidth() *2 +32, onPadY - Entities.tower().getHeight());
                 lPad.attatch(tower);
-                final int onS1Y = onPadY - Entities.rktS1().getHeight();
+                final int onS1Y = onPadY - Entities.rktS1().getHeight() -7;
                 final int onS2Y = onS1Y - Entities.rktS2().getHeight();
                 final int onS3Y = onS2Y - Entities.rktS3().getHeight();
-                final int rktPosnX = width /2 - 16;
+                final int rktPosnX = width /2 - 18;
                 Entity rktS1 = Entities.rktS1(rktPosnX, onS1Y);
                 Entity rktS2 = Entities.rktS2(rktPosnX, onS2Y);
                 Entity rktS3 = Entities.rktS3(rktPosnX, onS3Y);
                 Entity rktCone = Entities.rktCone(rktPosnX, onS3Y - Entities.rktCone().getHeight());
-                Entity rktFlameS3 = Entities.rktFlame(width /2, onS3Y + Entities.rktS3().getHeight());
-                Entity rktFlameS2 = Entities.rktFlame(width /2, onS2Y + Entities.rktS2().getHeight());
+                Entity rktFlameS3 = Entities.rktFlame(rktPosnX +16, onS3Y + Entities.rktS3().getHeight());
+                Entity rktFlameS2 = Entities.rktFlame(rktPosnX +16, onS2Y + Entities.rktS2().getHeight());
                 Entity rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y + Entities.rktS1().getHeight());
                 rktCone.attatch(rktS3);
                 rktS3.attatch(rktFlameS3);
