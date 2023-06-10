@@ -20,6 +20,7 @@ build() {
         jar -cmf "$MANIFEST" "$JAR_NAME" -C build .
         echo "done"
     fi
+    return $exitcode
 }
 
 run() {
