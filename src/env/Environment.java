@@ -14,12 +14,11 @@ public class Environment
 {
     public static enum Pov {
         ENTITY_POV,
-        ENVIRONMENT_POV,
+        EXTERNAL_POV,
         FOCUSSED_POV,
-        EXTERNAL_POV
     }
 
-    private int width, height;
+    private int canvasWidth, canvasHeight;
     private boolean hasGround;
     private BufferedImage bg;
     private BufferStrategy bs;
@@ -47,8 +46,8 @@ public class Environment
         this.dyEntity = 0;
         this.ddxEntity = 0;
         this.ddyEntity = 0;
-        this.width = canvas.getWidth();
-        this.height = canvas.getHeight();
+        this.canvasWidth = canvas.getWidth();
+        this.canvasHeight = canvas.getHeight();
         this.bs = canvas.getBufferStrategy();
         if (this.bs == null) {
             canvas.createBufferStrategy(3);
@@ -116,25 +115,29 @@ public class Environment
      * Useful for motion in POV of entities.
      * @param double delta-x
      * @param double delta-y
-     * @param Environment.Pov pov, pass Pov.FOCUSSED_POV, Pov.ENTITY_POV or Pov.ENVIRONMENT_POV
+     * @param Environment.Pov pov, pass Pov.FOCUSSED_POV, Pov.ENTITY_POV or Pov.EXTERNAL_POV
      */
     public void update(double dx, double dy, Pov pov)
     {
-        if (pov == Pov.FOCUSSED_POV) {
-            this.x += dx;
-            this.y += dy;
-            if (this.entities != null)
-                for (Entity e : this.entities)
-                    if (e != this.focussedEntity) e.update(dx, dy);
-        } else {
-            if (pov == Pov.EXTERNAL_POV || pov == Pov.ENTITY_POV) {
+        switch (pov) {
+            case FOCUSSED_POV: {
                 this.x += dx;
                 this.y += dy;
+                if (this.entities != null)
+                    for (Entity e : this.entities)
+                        if (e != this.focussedEntity) e.update(dx, dy);
+                break;
             }
-            if (pov == Pov.EXTERNAL_POV || pov == Pov.ENVIRONMENT_POV) {
+            case ENTITY_POV: {
+                this.x += dx;
+                this.y += dy;
+                break;
+            }
+            case EXTERNAL_POV: {
                 if (this.entities != null)
                     for (Entity e : this.entities)
                         e.update(dx, dy);
+                break;
             }
         }
     }
@@ -146,7 +149,7 @@ public class Environment
     public void update(double dx, double dy) { this.update(dx, dy, this.pov); }
     /**
      * Change POV of motion.
-     * @param Environment.Pov pov, pass Pov.FOCUSSED_POV, Pov.ENTITY_POV or Pov.ENVIRONMENT_POV
+     * @param Environment.Pov pov, pass Pov.FOCUSSED_POV, Pov.ENTITY_POV or Pov.EXTERNAL_POV
     `*/
     public void switchPOV(Pov pov)
     {
@@ -178,7 +181,7 @@ public class Environment
     public void render()
     {
         Graphics gfx = this.bs.getDrawGraphics();
-        gfx.clearRect(0, 0, this.width, this.height);
+        gfx.clearRect(0, 0, this.getWidth(), this.getHeight());
         gfx.drawImage(this.bg, (int) this.x, (int) this.y, null);
         if (this.entities != null)
             for (Entity e : this.entities)
@@ -193,15 +196,15 @@ public class Environment
     public void defForceUpdate()
     {
         if (this.pov == Pov.FOCUSSED_POV || this.pov == Pov.ENTITY_POV)
-            if (!(this.hasGround && this.y + this.bg.getHeight() <= this.height)) {
+            if (!(this.hasGround && this.y + this.getHeight() <= this.getCanvasHeight())) {
                 this.x += -this.dxEntity;
                 this.y += -this.dyEntity;
-            } else if (this.pov != Pov.ENVIRONMENT_POV)
-                this.switchPOV(Pov.ENVIRONMENT_POV);
-        else if (this.pov == Pov.ENVIRONMENT_POV)
+            } else if (this.pov != Pov.EXTERNAL_POV)
+                this.switchPOV(Pov.EXTERNAL_POV);
+        else if (this.pov == Pov.EXTERNAL_POV)
             if (this.entities != null)
                 for (Entity e : this.entities)
-                    if (!(this.hasGround && e.getY() + e.getHeight() >= this.height))
+                    if (!(this.hasGround && e.getY() + e.getHeight() >= this.getHeight()))
                         e.update(this.dxEntity, this.dyEntity);
         this.dxEntity += this.ddxEntity;
         this.dyEntity += this.ddyEntity;
@@ -223,6 +226,15 @@ public class Environment
             for (Entity e : this.entities)
                 e.flush();
         this.entities = null;
+    }
+
+    public int getCanvasWidth()
+    {
+        return this.canvasWidth;
+    }
+    public int getCanvasHeight()
+    {
+        return this.canvasHeight;
     }
 
     public int getWidth()
