@@ -28,8 +28,8 @@ elif [ "$1" = "" ]; then
     echo "compile sources from $SRC"
     find src -name "*.java" > sources.list
     javac -Xlint:deprecation -d build @sources.list
-    rm -f sources.list
     exitcode=$?
+    rm -f sources.list
     if (( exitcode == 0 )); then
         cp -r "$RES" "$BUILD/"
         cd "$BUILD"
