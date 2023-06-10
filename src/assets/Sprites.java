@@ -72,7 +72,7 @@ public class Sprites
         rktBurn = rockets1x7.crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 2*HEIGHT);
         rktFlame = new SpriteSheet(ImageLoader.loadImage("res/flame.png")).crop(0 * WIDTH, 0 * HEIGHT, 32, 95);
 
-        tower = launchtower1x7.crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 7*HEIGHT);
+        tower = launchtower1x7.crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 7*HEIGHT -1);
 
         lPad = launchPad12x2.crop(0*WIDTH, 0*HEIGHT, 12*WIDTH, 2*HEIGHT);
 

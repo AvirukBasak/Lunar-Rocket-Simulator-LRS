@@ -64,32 +64,48 @@ public class Sim implements Runnable
         switch (StateVars.activity) {
             case BELOW_KARMAN: {
                 if (env != null) break;
+                // load the sky background
                 env = Environments.skyGrad(0, height - Environments.skyGrad().getHeight());
+                /** the y posn right on top of the launch pad */
                 final int onPadY = height - Entities.lPad().getHeight();
+                // load the launch pad
                 Entity lPad = Entities.lPad(0, onPadY);
-                Entity tower = Entities.tower(width /2 - Entities.tower().getWidth() *2 +32, onPadY - Entities.tower().getHeight());
+                // load and place the tower
+                Entity tower = Entities.tower(width /2
+                        - Entities.tower().getWidth() /2
+                        - Entities.rktS1().getWidth() /2 -5,
+                    onPadY - Entities.tower().getHeight());
+                // attatch the launch pad and tower
                 lPad.attatch(tower);
-                final int onS1Y = onPadY - Entities.rktS1().getHeight() -7;
+                // calc posn of rocket stages
+                final int onS1Y = onPadY - Entities.rktS1().getHeight();
                 final int onS2Y = onS1Y - Entities.rktS2().getHeight();
                 final int onS3Y = onS2Y - Entities.rktS3().getHeight();
-                final int rktPosnX = width /2 - 18;
+                final int rktPosnX = width /2 - Entities.rktS1().getWidth() /2;
+                // load rocket sprites
                 Entity rktS1 = Entities.rktS1(rktPosnX, onS1Y);
                 Entity rktS2 = Entities.rktS2(rktPosnX, onS2Y);
                 Entity rktS3 = Entities.rktS3(rktPosnX, onS3Y);
                 Entity rktCone = Entities.rktCone(rktPosnX, onS3Y - Entities.rktCone().getHeight());
-                Entity rktFlameS3 = Entities.rktFlame(rktPosnX +16, onS3Y + Entities.rktS3().getHeight());
-                Entity rktFlameS2 = Entities.rktFlame(rktPosnX +16, onS2Y + Entities.rktS2().getHeight());
-                Entity rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y + Entities.rktS1().getHeight());
+                // calc posn of rocket flame sprites
+                Entity rktFlameS3 = Entities.rktFlame(rktPosnX, onS3Y + rktS3.getHeight());
+                Entity rktFlameS2 = Entities.rktFlame(rktPosnX, onS2Y + rktS2.getHeight());
+                Entity rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y + rktS1.getHeight());
+                // adjustments to flame sprite posn
+                rktFlameS3.update(rktFlameS3.getWidth()/2, 0);
+                rktFlameS2.update(rktFlameS2.getWidth()/2, 0);
+                // attatch rocket part entities to each other
                 rktCone.attatch(rktS3);
                 rktS3.attatch(rktFlameS3);
                 rktS3.attatch(rktS2);
                 rktS2.attatch(rktFlameS2);
                 rktS2.attatch(rktS1);
                 rktS1.attatch(rktFlameS1);
+                // add entities to environment
                 env.addEntity(rktCone);
-                // lPad.flush();
+                env.addEntity(lPad);
+                // focus on the rocket, move everything else wrt rocket
                 env.focusOn(rktCone);
-                rktFlameS1.hide();
                 break;
             }
             default: System.err.println("unimplemented");
