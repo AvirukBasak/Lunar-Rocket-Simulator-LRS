@@ -128,6 +128,7 @@ public class Entity
         if (this.attachments != null)
             for (Entity e : this.attachments)
                 e.flush();
+        this.attachments.clear();
         this.attachments = null;
     }
 

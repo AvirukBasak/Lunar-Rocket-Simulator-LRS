@@ -13,9 +13,11 @@ import entity.Entity;
 public class Environment
 {
     public static enum Pov {
-        ENTITY_POV,
         EXTERNAL_POV,
         FOCUSSED_POV,
+
+        @Deprecated
+        ENTITY_POV,
     }
 
     private int canvasWidth, canvasHeight;
@@ -25,7 +27,7 @@ public class Environment
 
     private double x, y, dxEntity, dyEntity, ddxEntity, ddyEntity;
     private Pov pov;
-    private Entity focussedEntity;
+    private List<Entity> focussedEntities;
     public List<Entity> entities;
 
     /**
@@ -53,7 +55,7 @@ public class Environment
             canvas.createBufferStrategy(3);
             this.bs = canvas.getBufferStrategy();
         }
-        this.focussedEntity = null;
+        this.focussedEntities = null;
         this.entities = null;
     }
     /**
@@ -111,6 +113,19 @@ public class Environment
         this.entities.add(e);
     }
     /**
+     * Remove an entity from the env.
+     * @param Entity
+     */
+    public void removeEntity(Entity e)
+    {
+        if (this.entities != null) try {
+            this.entities.remove(e);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.exit(1);
+        }
+    }
+    /**
      * Update the env, keeps entities static.
      * Useful for motion in POV of entities.
      * @param double delta-x
@@ -125,18 +140,18 @@ public class Environment
                 this.y += dy;
                 if (this.entities != null)
                     for (Entity e : this.entities)
-                        if (e != this.focussedEntity) e.update(dx, dy);
-                break;
-            }
-            case ENTITY_POV: {
-                this.x += dx;
-                this.y += dy;
+                        if (!this.focussedEntities.contains(e)) e.update(dx, dy);
                 break;
             }
             case EXTERNAL_POV: {
                 if (this.entities != null)
                     for (Entity e : this.entities)
                         e.update(dx, dy);
+                break;
+            }
+            case ENTITY_POV: {
+                this.x += dx;
+                this.y += dy;
                 break;
             }
         }
@@ -156,13 +171,39 @@ public class Environment
         this.pov = pov;
     }
     /**
+     * Clear focus.
+     * Auto switches POV to Pov.EXTERNAL_POV.
+     */
+    public void clearFocus()
+    {
+        this.pov = Pov.EXTERNAL_POV;
+        this.focussedEntities.clear();
+        this.focussedEntities = null;
+    }
+    /**
      * Focus on an entity.
      * Auto switches POV to Pov.FUCUSSED_POV.
      */
-    public void focusOn(Entity e)
+    public void addFocusOn(Entity e)
     {
         this.pov = Pov.FOCUSSED_POV;
-        this.focussedEntity = e;
+        if (this.focussedEntities == null)
+            this.focussedEntities = new ArrayList<Entity>();
+        this.focussedEntities.add(e);
+    }
+    /**
+     * Remove focus from an entity.
+     * Auto switches POV to Pov.FUCUSSED_POV.
+     */
+    public void removeFocusFrom(Entity e)
+    {
+        this.pov = Pov.FOCUSSED_POV;
+        if (this.focussedEntities != null) try {
+            this.focussedEntities.remove(e);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.exit(1);
+        }
     }
     /**
      * Update the env by absolute position.
@@ -195,17 +236,42 @@ public class Environment
      */
     public void defForceUpdate()
     {
-        if (this.pov == Pov.FOCUSSED_POV || this.pov == Pov.ENTITY_POV)
-            if (!(this.hasGround && this.y + this.getHeight() <= this.getCanvasHeight())) {
-                this.x += -this.dxEntity;
-                this.y += -this.dyEntity;
-            } else if (this.pov != Pov.EXTERNAL_POV)
-                this.switchPOV(Pov.EXTERNAL_POV);
-        else if (this.pov == Pov.EXTERNAL_POV)
-            if (this.entities != null)
-                for (Entity e : this.entities)
-                    if (!(this.hasGround && e.getY() + e.getHeight() >= this.getHeight()))
-                        e.update(this.dxEntity, this.dyEntity);
+        // cases provide guard clauses
+        switch (pov) {
+            case ENTITY_POV:
+            case FOCUSSED_POV: {
+                boolean hasReachedRelativeEnvBottom = this.hasGround
+                    && this.y + this.getHeight() <= this.getCanvasHeight();
+                if (hasReachedRelativeEnvBottom) {
+                    switchPOV(Pov.EXTERNAL_POV);
+                    return;
+                }
+                // update posn due to def force
+                this.update(-this.dxEntity, -this.dyEntity);
+                break;
+            }
+            case EXTERNAL_POV: {
+                boolean flagAllFallen = true;
+                if (this.entities != null)
+                    for (Entity e : this.entities) {
+                        boolean hasReachedEnvBottom = this.hasGround
+                            && e.getY() + e.getHeight() >= this.getCanvasHeight();
+                        // entity continues to fall till it hits ground
+                        if (!hasReachedEnvBottom) {
+                            /* TODO: issue: only focussed entity is checked,
+                               if other entities attatched to the focussed entity, they may go offscreen */
+                            e.update(this.dxEntity, this.dyEntity);
+                            flagAllFallen = false;
+                        }
+                    }
+                if (flagAllFallen) {
+                    if (focussedEntities != null) switchPOV(Pov.FOCUSSED_POV);
+                    return;
+                }
+                break;
+            }
+        }
+        // increment dx and dy by acceleration constant
         this.dxEntity += this.ddxEntity;
         this.dyEntity += this.ddyEntity;
     }
@@ -225,6 +291,7 @@ public class Environment
         if (this.entities != null)
             for (Entity e : this.entities)
                 e.flush();
+        this.entities.clear();
         this.entities = null;
     }
 

@@ -101,11 +101,12 @@ public class Sim implements Runnable
                 rktS2.attatch(rktFlameS2);
                 rktS2.attatch(rktS1);
                 rktS1.attatch(rktFlameS1);
+                // TODO: experiment with env addEntity and addFocusOn -> defForceUpdate issue
                 // add entities to environment
                 env.addEntity(rktCone);
                 env.addEntity(lPad);
                 // focus on the rocket, move everything else wrt rocket
-                env.focusOn(rktCone);
+                env.addFocusOn(rktCone);
                 break;
             }
             default: System.err.println("unimplemented");
