@@ -160,8 +160,18 @@ public class Sim implements Runnable
         if (running) return;
         StateVars.running = running = true;
         thread = new Thread(this);
-        console.start();
+        console.start(this);
         thread.start();
+    }
+
+    public synchronized void sleep(int time)
+    {
+        try {
+            thread.sleep(time);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+            System.exit(1);
+        }
     }
 
     // Method responsible for stopping thread
@@ -175,6 +185,7 @@ public class Sim implements Runnable
             thread.join();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
+            System.exit(1);
         }
     }
 }

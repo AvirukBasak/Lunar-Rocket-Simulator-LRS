@@ -2,6 +2,7 @@ package game;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.StringTokenizer;
 
 import assets.StateVars;
@@ -45,6 +46,7 @@ import assets.StateVars;
 
 public class Console implements Runnable
 {
+    private Sim sim;
     private Thread thread;
     private boolean running = false;
 
@@ -52,8 +54,8 @@ public class Console implements Runnable
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
-            return br.readLine();
-        } catch (java.io.IOException ex) {
+            return br.readLine().trim();
+        } catch (IOException ex) {
             ex.printStackTrace();
             System.exit(1);
         }
@@ -71,7 +73,7 @@ public class Console implements Runnable
                 System.out.println();
                 return "exit";
             }
-        } catch (java.io.IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
             System.exit(1);
         }
@@ -338,6 +340,10 @@ public class Console implements Runnable
                 if (command.equalsIgnoreCase("exit")) {
                     StateVars.running = false;
                     break;
+                } else if (command.equalsIgnoreCase("sleep")) {
+                    int time = Integer.parseInt(read());
+                    sim.sleep(time);
+                    thread.sleep(time);
                 }
             } catch (Exception ex) {
                 this.writeln("[E] " + ex);
@@ -347,12 +353,13 @@ public class Console implements Runnable
     }
 
     // Method responsible for starting thread.
-    public synchronized void start()
+    public synchronized void start(Sim sim)
     {
         if (running) return;
         StateVars.running = running = true;
         thread = new Thread(this);
         thread.start();
+        this.sim = sim;
     }
 
     // Method responsible for stopping thread
@@ -364,6 +371,7 @@ public class Console implements Runnable
             thread.join();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
+            System.exit(1);
         }
     }
 
