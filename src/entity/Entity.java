@@ -124,7 +124,7 @@ public class Entity
         if (this.parent != null && this.parent.attachments != null) this.parent.attachments.remove(this);
         if (this.env != null && this.env.entities != null) this.env.entities.remove(this);
         if (this.entityImg != null) this.entityImg.flush();
-        this.entityImg = null;
+        this.entityImg.flush();
         if (this.attachments != null)
             for (Entity e : this.attachments)
                 e.flush();
