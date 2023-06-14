@@ -60,105 +60,90 @@ public class Entities
 
     public static Entity rktS1()
     {
-        // if (m_rktS1 == null) NullPointerException("Entities: object 'rktS1' is null");
         if (m_rktS1 == null) return m_rktS1 = new Entity(Sprites.rktS1());
         else return m_rktS1;
     }
 
     public static Entity rktS2()
     {
-        // if (m_rktS2 == null) NullPointerException("Entities: object 'rktS2' is null");
         if (m_rktS2 == null) return m_rktS2 = new Entity(Sprites.rktS2());
         else return m_rktS2;
     }
 
     public static Entity rktS3()
     {
-        // if (m_rktS3 == null) NullPointerException("Entities: object 'rktS3' is null");
         if (m_rktS3 == null) return m_rktS3 = new Entity(Sprites.rktS3());
         else return m_rktS3;
     }
 
     public static Entity rktCone()
     {
-        // if (m_rktCone == null) NullPointerException("Entities: object 'rktCone' is null");
         if (m_rktCone == null) return m_rktCone = new Entity(Sprites.rktCone());
         else return m_rktCone;
     }
 
     public static Entity tower()
     {
-        // if (m_tower == null) NullPointerException("Entities: object 'tower' is null");
         if (m_tower == null) return m_tower = new Entity(Sprites.tower());
         else return m_tower;
     }
 
     public static Entity lPad()
     {
-        // if (m_lPad == null) NullPointerException("Entities: object 'lPad' is null");
         if (m_lPad == null) return m_lPad = new Entity(Sprites.lPad());
         else return m_lPad;
     }
 
     public static Entity rktDef()
     {
-        // if (m_rktDef == null) NullPointerException("Entities: object 'rktDef' is null");
         if (m_rktDef == null) return m_rktDef = new Entity(Sprites.rktDef());
         else return m_rktDef;
     }
 
     public static Entity earth()
     {
-        // if (m_earth == null) NullPointerException("Entities: object 'earth' is null");
         if (m_earth == null) return m_earth = new Entity(Sprites.earth());
         else return m_earth;
     }
 
     public static Entity moon()
     {
-        // if (m_moon == null) NullPointerException("Entities: object 'moon' is null");
         if (m_moon == null) return m_moon = new Entity(Sprites.moon());
         else return m_moon;
     }
 
     public static Entity rkt()
     {
-        // if (m_rkt == null) NullPointerException("Entities: object 'rkt' is null");
         if (m_rkt == null) return m_rkt = new Entity(Sprites.rkt());
         else return m_rkt;
     }
 
     public static Entity rktCovUp()
     {
-        // if (m_rktCovUp == null) NullPointerException("Entities: object 'rktCovUp' is null");
         if (m_rktCovUp == null) return m_rktCovUp = new Entity(Sprites.rktCovUp());
         else return m_rktCovUp;
     }
 
     public static Entity rktCovDown()
     {
-        // if (m_rktCovDown == null) NullPointerException("Entities: object 'rktCovDown' is null");
         if (m_rktCovDown == null) return m_rktCovDown = new Entity(Sprites.rktCovDown());
         else return m_rktCovDown;
     }
 
     public static Entity payLoad()
     {
-        // if (m_payLoad == null) NullPointerException("Entities: object 'payLoad' is null");
         if (m_payLoad == null) return m_payLoad = new Entity(Sprites.payLoad());
         else return m_payLoad;
     }
 
     public static Entity landerBrkOff()
     {
-        // if (m_landerBrkOff == null) NullPointerException("Entities: object 'landerBrkOff' is null");
         if (m_landerBrkOff == null) return m_landerBrkOff = new Entity(Sprites.landerBrkOff());
         else return m_landerBrkOff;
     }
 
     public static Entity moduleRsld()
     {
-        // if (m_moduleRsld == null) NullPointerException("Entities: object 'moduleRsld' is null");
         if (m_moduleRsld == null) return m_moduleRsld = new Entity(Sprites.moduleRsld());
         else return m_moduleRsld;
     }

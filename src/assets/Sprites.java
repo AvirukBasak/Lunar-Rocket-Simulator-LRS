@@ -98,155 +98,182 @@ public class Sprites
         m_lunSurface = null;
     }
 
-    public static BufferedImage rktCone() {
+    public static BufferedImage rktCone()
+    {
         if (m_rockets1x7 == null) m_rockets1x7 = new SpriteSheet(ImageLoader.loadImage("res/rockets1x7.png"));
         if (m_rktCone == null) return m_rktCone = m_rockets1x7.crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 1*HEIGHT);
         return m_rktCone;
     }
 
-    public static BufferedImage rktS3() {
+    public static BufferedImage rktS3()
+    {
         if (m_rockets1x7 == null) m_rockets1x7 = new SpriteSheet(ImageLoader.loadImage("res/rockets1x7.png"));
         if (m_rktS3 == null) return m_rktS3 = m_rockets1x7.crop(0*WIDTH, 1*HEIGHT, 1*WIDTH, 2*HEIGHT);
         return m_rktS3;
     }
 
-    public static BufferedImage rktS2() {
+    public static BufferedImage rktS2()
+    {
         if (m_rockets1x7 == null) m_rockets1x7 = new SpriteSheet(ImageLoader.loadImage("res/rockets1x7.png"));
         if (m_rktS2 == null) return m_rktS2 = m_rockets1x7.crop(0*WIDTH, 3*HEIGHT, 1*WIDTH, 2*HEIGHT);
         return m_rktS2;
     }
 
-    public static BufferedImage rktS1() {
+    public static BufferedImage rktS1()
+    {
         if (m_rockets1x7 == null) m_rockets1x7 = new SpriteSheet(ImageLoader.loadImage("res/rockets1x7.png"));
         if (m_rktS1 == null) return m_rktS1 = m_rockets1x7.crop(0*WIDTH, 5*HEIGHT, 1*WIDTH, 2*HEIGHT);
         return m_rktS1;
     }
 
-    public static BufferedImage rktBurn() {
+    public static BufferedImage rktBurn()
+    {
         if (m_rockets1x7 == null) m_rockets1x7 = new SpriteSheet(ImageLoader.loadImage("res/rockets1x7.png"));
         if (m_rktBurn == null) return m_rktBurn = m_rockets1x7.crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 2*HEIGHT);
         return m_rktBurn;
     }
 
-    public static BufferedImage rktFlame() {
+    public static BufferedImage rktFlame()
+    {
         if (m_rktFlame == null) return m_rktFlame = new SpriteSheet(ImageLoader.loadImage("res/flame.png")).crop(0 * WIDTH, 0 * HEIGHT, 32, 95);
         return m_rktFlame;
     }
 
-    public static BufferedImage tower() {
+    public static BufferedImage tower()
+    {
         if (m_launchtower1x7 == null) m_launchtower1x7 = new SpriteSheet(ImageLoader.loadImage("res/launchtower1x7.png"));
         if (m_tower == null) return m_tower = m_launchtower1x7.crop(0*WIDTH, 0*HEIGHT, 1*WIDTH, 7*HEIGHT -1);
         return m_tower;
     }
 
-    public static BufferedImage lPad() {
+    public static BufferedImage lPad()
+    {
         if (m_launchPad12x2 == null) m_launchPad12x2 = new SpriteSheet(ImageLoader.loadImage("res/launchPad12x2.png"));
         if (m_lPad == null) return m_lPad = m_launchPad12x2.crop(0*WIDTH, 0*HEIGHT, 12*WIDTH, 2*HEIGHT);
         return m_lPad;
     }
 
 
-    public static BufferedImage rktDef() {
+    public static BufferedImage rktDef()
+    {
         if (m_points == null) m_points = new SpriteSheet(ImageLoader.loadImage("res/points.png"));
         if (m_rktDef == null) return m_rktDef = m_points.crop(0, 0, 4, 4);
         return m_rktDef;
     }
 
-    public static BufferedImage earth() {
+    public static BufferedImage earth()
+    {
         if (m_points == null) m_points = new SpriteSheet(ImageLoader.loadImage("res/points.png"));
         if (m_earth == null) return m_earth = m_points.crop(5, 0, 16, 16);
         return m_earth;
     }
 
-    public static BufferedImage moon() {
+    public static BufferedImage moon()
+    {
         if (m_points == null) m_points = new SpriteSheet(ImageLoader.loadImage("res/points.png"));
         if (m_moon == null) return m_moon = m_points.crop(22, 0, 114, 114);
         return m_moon;
     }
 
-    public static BufferedImage stars() {
+    public static BufferedImage stars()
+    {
         if (m_stars == null) return m_stars = ImageLoader.loadImage("res/stars.png");
         return m_stars;
     }
 
-    public static BufferedImage skyGrad() {
+    public static BufferedImage skyGrad()
+    {
         if (m_skyGrad == null) return m_skyGrad = ImageLoader.loadImage("res/skyGrad.png");
         return m_skyGrad;
     }
 
-    public static BufferedImage rkt() {
+    public static BufferedImage rkt()
+    {
         if (m_payloadRsl0x0 == null) m_payloadRsl0x0 = new SpriteSheet(ImageLoader.loadImage("res/payloadRsl0x0.png"));
         if (m_rkt == null) return m_rkt = m_payloadRsl0x0.crop(0*WIDTH, 0*HEIGHT, 7*WIDTH, 5*HEIGHT);
         return m_rkt;
     }
 
-    public static BufferedImage rktCovUp() {
+    public static BufferedImage rktCovUp()
+    {
         if (m_payloadRsl0x0 == null) m_payloadRsl0x0 = new SpriteSheet(ImageLoader.loadImage("res/payloadRsl0x0.png"));
         if (m_rktCovUp == null) return m_rktCovUp = m_payloadRsl0x0.crop(7*WIDTH, 0*HEIGHT, 7*WIDTH, 2*HEIGHT);
         return m_rktCovUp;
     }
 
-    public static BufferedImage rktCovDown() {
+    public static BufferedImage rktCovDown()
+    {
         if (m_payloadRsl0x0 == null) m_payloadRsl0x0 = new SpriteSheet(ImageLoader.loadImage("res/payloadRsl0x0.png"));
         if (m_rktCovDown == null) return m_rktCovDown = m_payloadRsl0x0.crop(7*WIDTH, 3*HEIGHT, 7*WIDTH, 2*HEIGHT);
         return m_rktCovDown;
     }
 
 
-    public static BufferedImage payLoad() {
+    public static BufferedImage payLoad()
+    {
         if (m_releases4x3 == null) m_releases4x3 = new SpriteSheet(ImageLoader.loadImage("res/releases4x3.png"));
         if (m_payLoad == null) return m_payLoad = m_releases4x3.crop(0*WIDTH, 0*HEIGHT, 7*WIDTH, 3*HEIGHT);
         return m_payLoad;
     }
 
-    public static BufferedImage landerBrkOff() {
+    public static BufferedImage landerBrkOff()
+    {
         if (m_releases4x3 == null) m_releases4x3 = new SpriteSheet(ImageLoader.loadImage("res/releases4x3.png"));
         if (m_landerBrkOff == null) return m_landerBrkOff = m_releases4x3.crop(1*WIDTH, 3*HEIGHT, 4*WIDTH, 3*HEIGHT);
         return m_landerBrkOff;
     }
 
-    public static BufferedImage moduleRsld() {
+    public static BufferedImage moduleRsld()
+    {
         if (m_releases4x3 == null) m_releases4x3 = new SpriteSheet(ImageLoader.loadImage("res/releases4x3.png"));
         if (m_moduleRsld == null) return m_moduleRsld = m_releases4x3.crop(1*WIDTH, 6*HEIGHT, 4*WIDTH, 3*HEIGHT);
         return m_moduleRsld;
     }
 
-/* public static BufferedImage landerRsldF() {
+/* public static BufferedImage landerRsldF()
+    {
         if (m_landerRsldF == null) return m_landerRsldF = m_lander0x0.crop(1*WIDTH, 7*HEIGHT, 2*WIDTH, 2*HEIGHT);
         return m_landerRsldF;
     }
 
-    public static BufferedImage landerRsldB() {
+    public static BufferedImage landerRsldB()
+    {
         if (m_landerRsldB == null) return m_landerRsldB = m_lander0x0.crop(1*WIDTH, 1*HEIGHT, 2*WIDTH, 2*HEIGHT);
         return m_landerRsldB;
     }
 
-    public static BufferedImage lander64F() {
+    public static BufferedImage lander64F()
+    {
         if (m_lander64F == null) return m_lander64F = m_lander0x0.crop(0*WIDTH, 5*HEIGHT, 1*WIDTH, 1*HEIGHT);
         return m_lander64F;
     }
 
-    public static BufferedImage lander64B() {
+    public static BufferedImage lander64B()
+    {
         if (m_lander64B == null) return m_lander64B = m_lander0x0.crop(0*WIDTH, 7*HEIGHT, 1*WIDTH, 1*HEIGHT);
         return m_lander64B;
     }
 
-    public static BufferedImage lander128F() {
+    public static BufferedImage lander128F()
+    {
         if (m_lander128F == null) return m_lander128F = m_lander0x0.crop(1*WIDTH, 3*HEIGHT, 2*WIDTH, 2*HEIGHT);
         return m_lander128F;
     }
 
-    public static BufferedImage lander128B() {
+    public static BufferedImage lander128B()
+    {
         if (m_lander128B == null) return m_lander128B = m_lander0x0.crop(1*WIDTH, 5*HEIGHT, 2*WIDTH, 2*HEIGHT);
         return m_lander128B;
     } */
 
-    public static BufferedImage success() {
+    public static BufferedImage success()
+    {
         // if (m_success == null) return m_success = ImageLoader.loadImage("res/success.png");
         return m_success;
     }
 
-    public static BufferedImage failure() {
+    public static BufferedImage failure()
+    {
         // if (m_failure == null) return m_failure = ImageLoader.loadImage("res/failure.png");
         return m_failure;
     }

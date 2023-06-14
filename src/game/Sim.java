@@ -92,8 +92,8 @@ public class Sim implements Runnable
                 Entity rktFlameS2 = Entities.rktFlame(rktPosnX, onS2Y + rktS2.getHeight());
                 Entity rktFlameS1 = Entities.rktBurn(rktPosnX, onS1Y + rktS1.getHeight());
                 // adjustments to flame sprite posn
-                rktFlameS3.update(rktFlameS3.getWidth()/2, 0);
-                rktFlameS2.update(rktFlameS2.getWidth()/2, 0);
+                rktFlameS3.update(rktFlameS3.getWidth() /2, 0);
+                rktFlameS2.update(rktFlameS2.getWidth() /2, 0);
                 // attatch rocket part entities to each other
                 rktCone.attatch(rktS3);
                 rktS3.attatch(rktFlameS3);
